@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/bach_color"
+    android:layout_height="match_parent"
+    tools:context=".WWView">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rel_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar4"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#ffffff"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_top">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
+                android:textSize="15sp"
+                android:text="Greatcash Vision:-
+The vision of Greatcash is make Digital India and give employment to Greatcash users in free of cost through Greatcash App.Greatcash is 100% free to use App.It is an Android application which is product of a government registered company named "/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
+                android:textSize="15sp"
+                android:layout_below="@+id/text"
+                android:text="What We Do:-
+Greatcash is an Android application where anyone can earn unlimited in free of cost with no hidden charges.
+Greatcash is designed for publishers who want to install Apps,display videos,display ADs and completing surveys.
+Greatcash users earn money when they install Apps,watch ADs,Videos and complete surveys.
+Greatcash allows advertisers to promote their businesses in Greatcash.
+
+"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <!--<WebView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:id="@+id/web"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/toolbar4" />-->
+</RelativeLayout>

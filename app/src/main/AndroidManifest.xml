@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tbx.gc.greatcash">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".bean"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <service
+            android:name=".MyFirebaseInstanceIDService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Signup" />
+        <activity android:name=".OTP" />
+        <activity android:name=".ReferId" />
+        <activity android:name=".SignIn" />
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".Colony" />
+        <activity
+            android:name="com.heyzap.sdk.ads.HeyzapInterstitialActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
+        <activity
+            android:name="com.heyzap.sdk.ads.HeyzapVideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
+        <activity android:name="com.heyzap.sdk.ads.HeyzapProxyActivity" />
+        <activity
+            android:name="com.heyzap.sdk.ads.VASTActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize" />
+        <activity android:name="com.heyzap.sdk.ads.MediationTestActivity" />
+
+        <receiver android:name="com.heyzap.sdk.ads.PackageAddedReceiver">
+            <intent-filter>
+                <data android:scheme="package" />
+
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".InstallApp" />
+        <activity android:name=".JoinList" />
+        <activity android:name=".TrasnsactionList" />
+        <activity android:name=".WWView" />
+        <activity android:name=".Shoppingweb" />
+        <activity android:name=".EarnMore" />
+        <activity android:name=".Support" />
+        <activity
+            android:name=".Redeem"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".YouTube" />
+        <activity android:name=".Showimage" />
+        <activity android:name=".IncomeJunction" />
+        <activity android:name=".ComboitemList" />
+        <activity android:name=".YTTest"></activity>
+    </application>
+
+</manifest>

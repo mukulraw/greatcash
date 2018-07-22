@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/bach_color"
+    android:layout_height="match_parent"
+    tools:context=".WWView">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rel_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_top">
+
+        <TextView
+            android:id="@+id/text_support"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Support"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textAllCaps="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/text_supp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_support"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:text="To change your password please mail on"/>
+
+
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_supp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:text="support@greatcash.com"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <ImageView
+            android:id="@+id/img_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/email_icon"
+            android:layout_below="@+id/text_supp"
+            android:layout_marginTop="7dp"
+            android:layout_toLeftOf="@+id/text_email"/>
+
+
+        <TextView
+            android:id="@+id/text_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_email"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="Contact Number"/>
+
+        <RelativeLayout
+            android:id="@+id/phn_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_contact"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/img_phn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/phone_icon"/>
+
+            <TextView
+                android:id="@+id/text_phnone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/img_phn"
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"
+                android:text="+91 7978416108"/>
+
+
+            <ImageView
+                android:id="@+id/img_phntwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/phone_icon"
+                android:layout_below="@+id/img_phn"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/text_phntwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/img_phn"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/img_phntwo"
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"
+                android:text="+91 7992546330"/>
+
+
+            <TextView
+                android:id="@+id/text_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Service :"
+                android:textSize="15sp"
+                android:layout_below="@+id/text_phntwo"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/text_cusvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monday-Saturday: 10am to 7pm"
+                android:layout_below="@+id/text_phntwo"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@+id/text_customer" />
+
+
+            <TextView
+                android:id="@+id/text_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sunday:"
+                android:textSize="15sp"
+                android:layout_below="@+id/text_customer"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimaryDark"/>
+
+
+            <TextView
+                android:id="@+id/text_closed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Closed"
+                android:layout_below="@+id/text_customer"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/text_sunday" />
+
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

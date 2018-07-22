@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e9e7e7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Tree view Include All those Joining Who have either Completed their Challenge or not Completed"/>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/buttondark"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"
+            android:padding="20dp"
+            android:weightSum="3"
+            >
+
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mukul"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic"
+                    android:textColor="#fff"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Joining : 0"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic"
+                    android:textColor="#fff"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="$ 0.000"
+                    android:layout_gravity="center"
+                    android:gravity="end"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic"
+                    android:textColor="#fff"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/grid">
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        />
+
+</RelativeLayout>

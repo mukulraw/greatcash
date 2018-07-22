@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/bach_color"
+    android:layout_height="match_parent"
+    tools:context=".WWView">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rel_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_top">
+
+
+        <RelativeLayout
+            android:id="@+id/ed_amount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+
+            <EditText
+                android:id="@+id/ed_redeemAmount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="14sp"
+                android:backgroundTint="@color/gray_light"
+                android:inputType="number"
+                android:hint="Enter Redeem Amount"/>
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/rel_sel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/ed_amount"
+            android:background="@drawable/rec_grey"
+            android:layout_marginTop="10dp">
+
+          <TextView
+              android:id="@+id/text_selected"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:hint="Select type for payment"
+              android:textColor="@color/black"
+              android:textSize="16sp"
+              android:layout_centerVertical="true"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="80dp"/>
+
+            <RelativeLayout
+                android:id="@+id/rel_dropdown"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/img_dropDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/dropdown_icon"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_dropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_sel"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <RelativeLayout
+            android:id="@+id/rel_replace"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="80dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_below="@+id/recyclerView_dropDown">
+
+
+            <RelativeLayout
+                android:id="@+id/rel_paypal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/ed_paypalID"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="number"
+                    android:hint="Enter PayPal ID"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_vikash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/ed_vikashID"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="number"
+                    android:hint="Enter Vikash ID"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rel_bankOfIndia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/ed_accountNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="number"
+                    android:hint="Enter Account Number"/>
+
+                <EditText
+                    android:id="@+id/ed_ifscCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:inputType="number"
+                    android:hint="Enter IFSC Code"
+                    android:layout_below="@+id/ed_accountNumber"/>
+
+
+                <EditText
+                    android:id="@+id/ed_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Enter Name"
+                    android:inputType="textPersonName"
+                    android:layout_below="@+id/ed_ifscCode"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_paytm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/ed_paytm_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="number"
+                    android:hint="Enter Paytm Number"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/rank_dialog_button"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:text="Submit"
+            android:textColor="#FFF"
+            android:background="@color/colorPrimary"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="18sp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:padding="5dp" />
+
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        android:visibility="gone" />
+
+
+
+
+</RelativeLayout>

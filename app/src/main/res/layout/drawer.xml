@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:clickable="true"
+    android:focusable="true">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:textSize="18sp"
+                        android:id="@+id/name"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10dp"
+                        android:text="PERSON NAME"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textStyle="bold"
+                        android:id="@+id/wallet"
+                        android:padding="10dp"
+                        android:paddingEnd="20dp"
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical|end"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10dp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:padding="5dp"
+                        android:id="@+id/reg_id"
+                        android:paddingStart="10dp"
+                        android:layout_marginStart="10dp"
+                        android:text="Reg.ID:12345678"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingEnd="20dp"
+                        android:visibility="gone"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical|end"
+                        android:layout_marginStart="10dp"
+                        android:text="ij Bal:5000"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="Challenge"
+                android:id="@+id/challenge"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/challenge"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/dashboard"
+                android:textColor="#fff"
+                android:text="Dashboard"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/dashboard"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:id="@+id/network"
+                android:text="My Network"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/network"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:text="Earn Money"
+                android:id="@+id/earn_money"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/money"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="Promotion"
+                android:visibility="gone"
+                android:id="@+id/promotion"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/promotion"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/invite_and_earn"
+                android:textColor="#fff"
+                android:text="@string/invite"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/invite"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:id="@+id/shopping"
+                android:text="Shopping"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/shopping2"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/transaction"
+                android:textColor="#fff"
+                android:text="My Transaction"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/cards"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/earnmore"
+                android:textColor="#fff"
+                android:text="Earn More"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/money"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/video"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="Watch Video"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/play"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:text="@string/survey"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/cards"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="You Tube"
+                android:id="@+id/youtube"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/youtube"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:id="@+id/about"
+                android:text="About Us"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/information"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/id_activator"
+                android:textColor="#fff"
+                android:text="ID Activator"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/activator"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/offer"
+                android:textColor="#fff"
+                android:text="Search Country Offer"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/offer"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/kyc"
+                android:textColor="#fff"
+                android:text="E-KYC"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/offer"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:id="@+id/help"
+                android:text="Help"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/shopping2"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/achievement"
+                android:textColor="#fff"
+                android:text="Achievers"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/achievers"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:id="@+id/hot_list"
+                android:textColor="#fff"
+                android:text="Hot List"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/achievers"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/online_survey"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="Online Survey"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/survey"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/faq"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="FAQ's"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/information"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/createTicket"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="Create Ticket"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/ic_rate_review_black_24dp"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:id="@+id/notification"
+                android:text="Notication"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/notifications"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:id="@+id/setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="Setting"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/settings"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+            <TextView
+                android:id="@+id/help_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="Help"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/ic_rate_review_black_24dp"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:id="@+id/rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:text="Rate Us"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/ic_rate_review_black_24dp"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>
