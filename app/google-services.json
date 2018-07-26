@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1076949813843",
+    "firebase_url": "https://greatcash-5b0ab.firebaseio.com",
+    "project_id": "greatcash-5b0ab",
+    "storage_bucket": "greatcash-5b0ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076949813843:android:f21f0ae08716a951",
+        "android_client_info": {
+          "package_name": "com.tbx.gc.greatcash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076949813843-fgce3rl19p4q2s01rr3auhosfrooqmb1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tbx.gc.greatcash",
+            "certificate_hash": "1a1777634b5685e6d0b50e0ace0cdef64ef22cd4"
+          }
+        },
+        {
+          "client_id": "1076949813843-2romd0j67lnrrb5tqfu4dbt2figah1ts.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1076949813843-2romd0j67lnrrb5tqfu4dbt2figah1ts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiGgpFX5-wPpz_5cnuBg9SyEa_odOoUlQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076949813843-2romd0j67lnrrb5tqfu4dbt2figah1ts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

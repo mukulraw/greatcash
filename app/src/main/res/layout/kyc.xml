@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:id="@+id/rel_upload"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+
+
+            <LinearLayout
+                android:id="@+id/linear_upload"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rec_grey">
+
+                        <ImageView
+                            android:id="@+id/img_user"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/user_default"/>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3">
+
+                    <Button
+                        android:id="@+id/btn_uploadUser"
+                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:text="Upload Photo"
+                        android:layout_margin="5dip"
+                        android:textColor="#FFF"
+                        android:background="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:padding="5dp"
+                        android:layout_gravity="center" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rel_sel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rec_grey"
+            android:layout_below="@+id/rel_upload"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/text_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Select Document Type"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="80dp"/>
+
+            <RelativeLayout
+                android:id="@+id/rel_dropdown"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/img_dropDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/dropdown_icon"/>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_dropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_sel"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <RelativeLayout
+            android:id="@+id/rel_upload_doc"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/recyclerView_dropDown"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+
+
+            <LinearLayout
+                android:id="@+id/linear_upload_doc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rec_grey">
+
+                        <ImageView
+                            android:id="@+id/img_user_doc"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/user_default"/>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3">
+
+                    <Button
+                        android:id="@+id/btn_uploadDoc"
+                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:text="Upload Doc Photo"
+                        android:layout_margin="5dip"
+                        android:textColor="#FFF"
+                        android:background="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:padding="5dp"
+                        android:layout_gravity="center" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rel_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/rel_upload_doc">
+
+            <EditText
+                android:id="@+id/ed_Id"
+                android:layout_width="match_parent"
+                android:inputType="number"
+                android:layout_height="50dp"
+                android:imeOptions="actionNext"
+                android:hint="ID"/>
+
+            <EditText
+                android:id="@+id/ed_nominee_nmae"
+                android:layout_width="match_parent"
+                android:inputType="textPersonName"
+                android:layout_height="50dp"
+                android:imeOptions="actionNext"
+                android:layout_below="@+id/ed_Id"
+                android:hint="Nominee Name"/>
+
+            <EditText
+                android:id="@+id/ed_nominee_relation"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:layout_marginTop="10dp"
+                android:hint="Nominee Relation"
+                android:layout_below="@+id/ed_nominee_nmae"/>
+
+            <TextView
+                android:id="@+id/ed_nominee_dob"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:textSize="17sp"
+                android:hint="Nominee DOB"
+                android:layout_below="@+id/ed_nominee_relation"
+                android:layout_marginTop="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#939393"
+                android:layout_below="@+id/ed_nominee_dob"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
+
+
+        </RelativeLayout>
+
+
+
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_below="@+id/recyclerView_dropDown"-->
+            <!--android:background="@drawable/rec_black_outline"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="80dp"-->
+            <!--android:layout_marginTop="20dp">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/ed_adhar_num"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:inputType="number"-->
+                <!--android:layout_marginLeft="5dp"-->
+                <!--android:hint="Adhar Number"-->
+                <!--android:background="@android:color/transparent"/>-->
+
+        <!--</RelativeLayout>-->
+
+
+
+
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/getimage"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_below="@+id/recyclerView_dropDown"-->
+            <!--android:background="@drawable/rec_black_outline"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginTop="20dp">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/img_camera"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/camera_icon"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_centerVertical="true"/>-->
+
+        <!--</RelativeLayout>-->
+
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView9"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:background="@drawable/rec_black_outline"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_centerHorizontal="true"/>-->
+
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/rel_three"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/dark_less_round"
+            android:text="Submit"
+            android:textColor="#ffffff" />
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"
+        android:visibility="gone" />
+</RelativeLayout>

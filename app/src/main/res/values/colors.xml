@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#c60000</color>
+    <color name="colorPrimaryDark">#4c0000</color>
+    <color name="colorAccent">#4f75ab</color>
+    <color name="bach_color">#eaeaea</color>
+    <color name="card_back">#dadada</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+</resources>
