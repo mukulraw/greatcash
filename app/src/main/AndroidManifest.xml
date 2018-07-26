@@ -57,12 +57,15 @@
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
             </intent-filter>
         </receiver>
-        <activity android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
+
+        <activity
+            android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:hardwareAccelerated="true"/>
-        <activity android:name="com.adcolony.sdk.AdColonyAdViewActivity"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name="com.adcolony.sdk.AdColonyAdViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:hardwareAccelerated="true"/>
+            android:hardwareAccelerated="true" />
         <activity android:name=".InstallApp" />
         <activity android:name=".JoinList" />
         <activity android:name=".TrasnsactionList" />
@@ -78,7 +81,8 @@
         <activity android:name=".IncomeJunction" />
         <activity android:name=".ComboitemList" />
         <activity android:name=".YTTest" />
-        <activity android:name=".AdVideos"></activity>
+        <activity android:name=".AdVideos" />
+        <activity android:name=".Ranking"></activity>
     </application>
 
 </manifest>

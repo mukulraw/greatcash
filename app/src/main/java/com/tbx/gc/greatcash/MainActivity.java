@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView wallet , idActivator , invite , notification , offer , transaction , network , help , achievement  ,faq , survey , video , youtube , about , regId,setting,rateus,createTicket,kyc,earnmore,hot_list,help_menu;
 
+    TextView ranking;
     SharedPreferences pref;
     ProgressBar progress;
     float rating_value;
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         challenge = findViewById(R.id.challenge);
         shopping = findViewById(R.id.shopping);
         idActivator = findViewById(R.id.id_activator);
+        ranking = findViewById(R.id.ranking);
         invite = findViewById(R.id.invite_and_earn);
         offer = findViewById(R.id.offer);
         transaction = findViewById(R.id.transaction);
@@ -603,6 +605,15 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this , "This feature is b.locked, please unlock it by completing the challenge" , Toast.LENGTH_SHORT).show();
 
                 }
+            }
+        });
+
+        ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this , Ranking.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
