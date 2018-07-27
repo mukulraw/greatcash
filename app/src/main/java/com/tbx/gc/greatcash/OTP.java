@@ -46,7 +46,7 @@ public class OTP extends AppCompatActivity {
         verify = findViewById(R.id.button4);
         progress = findViewById(R.id.progressBar4);
 
-        otp.setText(o);
+        //otp.setText(o);
 
         verify.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,104 +18,62 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:id="@+id/name"
+                android:layout_marginTop="10dp"
+                android:text="PERSON NAME"/>
 
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#ffffff"
-                        android:textStyle="bold"
-                        android:padding="10dp"
-                        android:textSize="18sp"
-                        android:id="@+id/name"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:text="PERSON NAME"/>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:id="@+id/wallet"
-                        android:padding="10dp"
-                        android:paddingEnd="20dp"
-                        android:textSize="16sp"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical|end"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:textColor="#fff"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingEnd="20dp"
+                android:id="@+id/mobile"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:text="7503381028"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:padding="5dp"
+                android:id="@+id/reg_id"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Reg.ID:12345678"/>
 
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:id="@+id/wallet"
+                android:text="asdasdasd"
+                android:padding="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                />
 
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#fff"
-                        android:padding="5dp"
-                        android:id="@+id/reg_id"
-                        android:paddingStart="10dp"
-                        android:layout_marginStart="10dp"
-                        android:text="Reg.ID:12345678"/>
-                </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#fff"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:paddingEnd="20dp"
-                        android:visibility="gone"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical|end"
-                        android:layout_marginStart="10dp"
-                        android:text="ij Bal:5000"/>
-                </LinearLayout>
-            </LinearLayout>
+
 
 
             <TextView
@@ -772,6 +730,34 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:padding="10dp"
+                android:id="@+id/achievers"
+                android:textColor="#fff"
+                android:text="Achievers"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/achievers"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
                 android:textColor="#fff"
                 android:id="@+id/ranking"
                 android:text="Ranking"
@@ -789,6 +775,31 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="#a19d9d"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:id="@+id/withdrawal"
+                android:text="Withdrawal"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/money"
+                android:drawableEnd="@drawable/rightarrow"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#a19d9d"/>
+
 
             <TextView
                 android:id="@+id/setting"

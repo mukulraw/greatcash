@@ -199,7 +199,7 @@ public class TreeView extends Fragment  {
 
             final netBean item = list.get(position);
 
-            holder.level.setText("level " + String.valueOf(position + 1));
+            holder.level.setText("Level " + String.valueOf(position + 1));
             holder.amount.setText("$ " + item.getAmount());
             holder.joins.setText("Joining : " + item.getJoins());
 

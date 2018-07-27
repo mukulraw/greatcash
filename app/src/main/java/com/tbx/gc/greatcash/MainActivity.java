@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -73,11 +74,11 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     LinearLayout replace;
 
-    TextView dashboard , challenge , shopping , name;
+    TextView dashboard , challenge , shopping , name , mobile;
 
     TextView wallet , idActivator , invite , notification , offer , transaction , network , help , achievement  ,faq , survey , video , youtube , about , regId,setting,rateus,createTicket,kyc,earnmore,hot_list,help_menu;
 
-    TextView ranking;
+    TextView ranking , withdrawal , ac;
     SharedPreferences pref;
     ProgressBar progress;
     float rating_value;
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         replace = findViewById(R.id.replace);
         name = findViewById(R.id.name);
+        mobile = findViewById(R.id.mobile);
+        ac = findViewById(R.id.achievers);
         video = findViewById(R.id.video);
 
         dashboard = findViewById(R.id.dashboard);
@@ -105,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         shopping = findViewById(R.id.shopping);
         idActivator = findViewById(R.id.id_activator);
         ranking = findViewById(R.id.ranking);
+        withdrawal = findViewById(R.id.withdrawal);
         invite = findViewById(R.id.invite_and_earn);
         offer = findViewById(R.id.offer);
         transaction = findViewById(R.id.transaction);
@@ -134,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
         name.setText(pref.getString("name" , ""));
         regId.setText("Reg.ID: " + pref.getString("refId" , ""));
+
+        mobile.setText("Ph. : " + pref.getString("phone" , ""));
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -327,20 +333,22 @@ public class MainActivity extends AppCompatActivity {
        });
 
 
-       wallet.setOnClickListener(new View.OnClickListener() {
+       withdrawal.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
 
                if (!b.locked) {
 
-                   FragmentManager fm = getSupportFragmentManager();
+                   showDialog2();
+
+                   /*FragmentManager fm = getSupportFragmentManager();
                    FragmentTransaction ft = fm.beginTransaction();
                    Wallat frag1 = new Wallat();
                    ft.replace(R.id.replace, frag1);
                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                    //ft.addToBackStack(null);
                    ft.commit();
-                   drawerLayout.closeDrawer(GravityCompat.START);
+                   drawerLayout.closeDrawer(GravityCompat.START);*/
                }
                else
                {
@@ -372,6 +380,21 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 InviteEarn frag1 = new InviteEarn();
+                ft.replace(R.id.replace , frag1);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                //ft.addToBackStack(null);
+                ft.commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
+
+        ac.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                Ac frag1 = new Ac();
                 ft.replace(R.id.replace , frag1);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 //ft.addToBackStack(null);
@@ -837,7 +860,33 @@ public class MainActivity extends AppCompatActivity {
 
 
         } else {
-            super.onBackPressed();
+
+
+            final Dialog dialog = new Dialog(MainActivity.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.exit_popup);
+            dialog.setCancelable(false);
+            dialog.show();
+
+            Button yes = dialog.findViewById(R.id.button10);
+            Button no = dialog.findViewById(R.id.button11);
+
+            no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+
+
         }
 
     }
@@ -881,7 +930,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     str_totalAmount=response.body().getData().getTotalAmountEarned();
                     Log.e("amounttttttt",""+str_totalAmount);
-                    wallet.setText("GC BAL.$"+str_totalAmount);
+                    wallet.setText("GC BAL. $"+str_totalAmount);
 
                     if (response.body().getData().getDashboardStatus().equals("1"))
                     {
@@ -993,11 +1042,99 @@ public class MainActivity extends AppCompatActivity {
        alertDialog.show();
     }
 
+    public void showDialog2()
+    {
+        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+        View subView = inflater.inflate(R.layout.dialog_layout, null);
+        final EditText subEditText = (EditText)subView.findViewById(R.id.dialogEditText);
+        final Button submit = (Button) subView.findViewById(R.id.btnaleartdialog);
+
+        SharedPreferences sharedPreferences ;
+        sharedPreferences = getSharedPreferences("pref",MODE_PRIVATE);
+        final String password = sharedPreferences.getString("passwordSave","");
+
+
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter your password");
+        //builder.setMessage("AlertDialog Message");
+        builder.setView(subView);
+        final AlertDialog alertDialog = builder.create();
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+
+                String str_password=subEditText.getText().toString();
+
+                if(str_password.equals(""))
+                {
+                    Toast.makeText(getApplicationContext(),"Enter your password",Toast.LENGTH_SHORT).show();
+                }
+
+                else if(!subEditText.getText().toString().equals(password))
+                {
+                    Toast.makeText(MainActivity.this, "Your password is incorrect", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else
+                {
+                    alertDialog.dismiss();
+                    FragmentManager fm = getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    Wallat frag1 = new Wallat();
+                    ft.replace(R.id.replace , frag1);
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                    //ft.addToBackStack(null);
+                    ft.commit();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+
+//               if (subEditText.getText().toString().equals(password))
+//               {
+//                   alertDialog.dismiss();
+//                   FragmentManager fm = getSupportFragmentManager();
+//                   FragmentTransaction ft = fm.beginTransaction();
+//                   Profile frag1 = new Profile();
+//                   ft.replace(R.id.replace , frag1);
+//                   ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+//               //ft.addToBackStack(null);
+//                   ft.commit();
+//               drawerLayout.closeDrawer(GravityCompat.START);
+//               }
+//               else
+//                   {
+//                       subEditText.setText("");
+//                       Toast.makeText(MainActivity.this, "Your password is incorrect", Toast.LENGTH_SHORT).show();
+//                   }
+            }
+        });
+
+//        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+//
+//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(MainActivity.this, "Cancel", Toast.LENGTH_LONG).show();
+//            }
+//        });
+
+        alertDialog.show();
+    }
+
 
     public void rate()
     {
 
     }
+
 
 
 

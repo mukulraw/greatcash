@@ -59,10 +59,10 @@ public class Dashboard extends Fragment{
 
         marquee = view.findViewById(R.id.textView6);
 
-        marquee.setText("To unlock the dashboard you have to complete the challenges by installing all the apps");
+        marquee.setText("Welcome to GreatCash Coming Soon Web income and recharge portal");
         marquee.setEllipsize(TextUtils.TruncateAt.MARQUEE);
         marquee.setSingleLine(true);
-        marquee.setMarqueeRepeatLimit(5);
+        marquee.setMarqueeRepeatLimit(50);
         marquee.setSelected(true);
 
         level1join = view.findViewById(R.id.textView8);
@@ -131,14 +131,14 @@ public class Dashboard extends Fragment{
                         b.locked = true;
 
                         locked.setVisibility(View.VISIBLE);
-                        marquee.setVisibility(View.VISIBLE);
+                        //marquee.setVisibility(View.VISIBLE);
                     }
                     else
                     {
                         b.locked = false;
 
                         locked.setVisibility(View.GONE);
-                        marquee.setVisibility(View.GONE);
+                        //marquee.setVisibility(View.GONE);
                         level1join.setText(response.body().getData().getLevel1Joins());
                         level2join.setText(response.body().getData().getLevel2Joins());
                         level3join.setText(response.body().getData().getLevel3Joins());

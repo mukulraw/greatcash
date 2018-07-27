@@ -10,6 +10,7 @@ import com.tbx.gc.greatcash.RatingPoojo.Profile;
 import com.tbx.gc.greatcash.RedeemRequest.RedeemReqBean;
 import com.tbx.gc.greatcash.StatePOJO.StateBean;
 import com.tbx.gc.greatcash.TicketReq.Ticketrequest;
+import com.tbx.gc.greatcash.acPOJO.acBean;
 import com.tbx.gc.greatcash.achieversPOJO.achieversBean;
 import com.tbx.gc.greatcash.audioPOJO.audioBean;
 import com.tbx.gc.greatcash.challengeAcceptPOJO.challengeAcceptBean;
@@ -107,6 +108,11 @@ public interface ApiInterface {
             (@Body challengeRequestBean body
             );
 
+    @Headers({"Content-Type: application/json"})
+    @POST("great-cash/api/api.php")
+    Call<acBean> ac
+            (@Body challengeRequestBean body
+            );
 
     @Headers({"Content-Type: application/json"})
     @POST("great-cash/api/api.php")
