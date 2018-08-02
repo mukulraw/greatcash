@@ -43,8 +43,10 @@ dependencies {
     implementation 'com.adcolony:sdk:3.3.4'
     implementation files('libs/heyzap-ads-sdk-9.21.0.jar')
     implementation 'com.android.volley:volley:1.1.0'
-    compile 'com.github.bumptech.glide:glide:4.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.0.0'
+    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.0.0'
     //implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'swarajsaaj:otpreader:1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

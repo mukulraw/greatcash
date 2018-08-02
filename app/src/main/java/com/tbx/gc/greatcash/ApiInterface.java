@@ -17,6 +17,7 @@ import com.tbx.gc.greatcash.challengeAcceptPOJO.challengeAcceptBean;
 import com.tbx.gc.greatcash.challengePOJO.challengeBean;
 import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
 import com.tbx.gc.greatcash.comboPOJO.comboBean;
+import com.tbx.gc.greatcash.cpiPOJO.cpiBean;
 import com.tbx.gc.greatcash.createTicketPOJO.ticketBean;
 import com.tbx.gc.greatcash.dashboardPOJO.dashboardBean;
 import com.tbx.gc.greatcash.editProfileRerquestPOJO.editProileRequestBean;
@@ -51,6 +52,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -292,6 +294,9 @@ public interface ApiInterface {
 
     @POST("great-cash/api/api.php")
     Call<Profile> setRating(@Body Map<String, String> map);
+
+    @GET("dashboard/reports/campaign_json.php?id=849363&show=10&country=IN&device=android")
+    Call<cpiBean> getCPI();
 
 
 }

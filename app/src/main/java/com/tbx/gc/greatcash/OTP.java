@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,8 +22,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import swarajsaaj.smscodereader.interfaces.OTPListener;
+import swarajsaaj.smscodereader.receivers.OtpReader;
 
-public class OTP extends AppCompatActivity {
+public class OTP extends AppCompatActivity implements OTPListener {
 
     EditText otp;
     Button verify;
@@ -36,6 +39,8 @@ public class OTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
+
+        OtpReader.bind(this,"INFOSM");
 
         pref = getSharedPreferences("pref" , Context.MODE_PRIVATE);
         edit = pref.edit();
@@ -133,6 +138,18 @@ public class OTP extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    public void otpReceived(String messageText) {
+        Log.d("otpp" , messageText);
+
+        String sub = messageText.substring(messageText.length() - 6,messageText.length());
+
+        Log.d("otpp" , sub);
+
+        otp.setText(sub);
 
     }
 }
