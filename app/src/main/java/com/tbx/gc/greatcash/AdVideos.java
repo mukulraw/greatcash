@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -23,7 +24,7 @@ public class AdVideos extends AppCompatActivity implements RewardedVideoAdListen
     RelativeLayout back;
     ProgressBar progress;
 
-    ImageView admob , adcolony;
+    LinearLayout admob , adcolony;
 
     private RewardedVideoAd mRewardedVideoAd;
     AdColonyInterstitial ad;

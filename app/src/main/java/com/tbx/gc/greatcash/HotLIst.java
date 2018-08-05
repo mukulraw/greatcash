@@ -27,7 +27,11 @@ import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
 import com.tbx.gc.greatcash.hotListPOJO.DataHotList;
 import com.tbx.gc.greatcash.hotListPOJO.hotListBean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -44,18 +48,22 @@ public class HotLIst extends Fragment {
 
     RecyclerView.LayoutManager manager;
     HotlistAdapter adapter;
-   private List<DataHotList> HotList=new ArrayList<>();
+    private List<DataHotList> HotList = new ArrayList<>();
     SharedPreferences pref;
     ProgressBar progress;
+
+    TextView date;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.hot , container , false);
+        View view = inflater.inflate(R.layout.hot, container, false);
 
-        pref = getContext().getSharedPreferences("pref" , Context.MODE_PRIVATE);
+
+        date = view.findViewById(R.id.date);
+        pref = getContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
         grid = view.findViewById(R.id.grid);
         progress = view.findViewById(R.id.progress);
@@ -64,9 +72,39 @@ public class HotLIst extends Fragment {
 
         grid.setLayoutManager(manager);
 
-        adapter = new HotlistAdapter(getContext(),HotList);
+        adapter = new HotlistAdapter(getContext(), HotList);
 
         grid.setAdapter(adapter);
+
+
+        Calendar aCalendar = Calendar.getInstance();
+        aCalendar.set(Calendar.DATE, 1);
+        aCalendar.add(Calendar.DAY_OF_MONTH, -1);
+        Date lastDateOfPreviousMonth = aCalendar.getTime();
+        aCalendar.set(Calendar.DATE, 1);
+        Date firstDateOfPreviousMonth = aCalendar.getTime();
+
+
+
+        SimpleDateFormat spf = new SimpleDateFormat("M d");
+        try {
+            Date newDate = spf.parse(firstDateOfPreviousMonth.getMonth() + " " + String.valueOf(firstDateOfPreviousMonth.getDate()));
+
+            spf = new SimpleDateFormat("MMM dd");
+            String newDateString = spf.format(newDate);
+            Log.d("ddaattee",  newDateString);
+
+            Date c = Calendar.getInstance().getTime();
+
+            SimpleDateFormat df = new SimpleDateFormat("MMM dd");
+            String formattedDate = df.format(c);
+
+            date.setText("Joining between " + newDateString + " - " + formattedDate);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
 
         HotListApi();
@@ -74,48 +112,44 @@ public class HotLIst extends Fragment {
         return view;
     }
 
-    private void HotListApi()
-    {
+    private void HotListApi() {
         progress.setVisibility(View.VISIBLE);
 
-        bean b=(bean)getContext().getApplicationContext();
+        bean b = (bean) getContext().getApplicationContext();
 
-        Retrofit retrofit=new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(b.BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
-        ApiInterface cr=retrofit.create(ApiInterface.class);
+        ApiInterface cr = retrofit.create(ApiInterface.class);
 
-        challengeRequestBean boby=new challengeRequestBean();
+        challengeRequestBean boby = new challengeRequestBean();
 
-        Data data=new Data();
+        Data data = new Data();
 
         boby.setAction("hot_list");
         data.setUserId(pref.getString("id", ""));
 
         boby.setData(data);
 
-        Call<hotListBean> call=cr.hotListApi(boby);
-        Log.e("222","222");
+        Call<hotListBean> call = cr.hotListApi(boby);
+        Log.e("222", "222");
 
-        call.enqueue(new Callback<hotListBean>()
-        {
+        call.enqueue(new Callback<hotListBean>() {
 
             @Override
-            public void onResponse(Call<hotListBean> call, Response<hotListBean> response)
-            {
-                Log.e("222","222");
+            public void onResponse(Call<hotListBean> call, Response<hotListBean> response) {
+                Log.e("222", "222");
 
                 progress.setVisibility(View.GONE);
 
-                if (response.body().getStatus().equals("1"))
-                {
+                if (response.body().getStatus().equals("1")) {
 
                     adapter.setGridData(response.body().getDataHot());
 
 
-                    Log.e("3333","3333");
+                    Log.e("3333", "3333");
                 }
 
                 //progress.setVisibility(View.GONE);
@@ -128,7 +162,6 @@ public class HotLIst extends Fragment {
         });
 
 
-
     }
 
 //    @Override
@@ -139,22 +172,20 @@ public class HotLIst extends Fragment {
 //
 //    }
 
-    public class HotlistAdapter extends RecyclerView.Adapter<HotlistAdapter.MyViewHolder>{
+    public class HotlistAdapter extends RecyclerView.Adapter<HotlistAdapter.MyViewHolder> {
 
 
         Context context;
-        List<DataHotList>dataHotLists;
+        List<DataHotList> dataHotLists;
 
-        public HotlistAdapter(Context context, List<DataHotList> list)
-        {
-            this.context=context;
-            this.dataHotLists=list;
+        public HotlistAdapter(Context context, List<DataHotList> list) {
+            this.context = context;
+            this.dataHotLists = list;
         }
 
 
-        public void setGridData(List<DataHotList> list)
-        {
-            this.dataHotLists=list;
+        public void setGridData(List<DataHotList> list) {
+            this.dataHotLists = list;
             notifyDataSetChanged();
         }
 
@@ -164,20 +195,19 @@ public class HotLIst extends Fragment {
         public HotlistAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-            View view = LayoutInflater.from(context).inflate(R.layout.hot_list_model_new , parent , false);
+            View view = LayoutInflater.from(context).inflate(R.layout.hot_list_model_new, parent, false);
 
             return new MyViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull HotlistAdapter.MyViewHolder holder, int position)
-        {
-              DataHotList hotList=dataHotLists.get(position);
+        public void onBindViewHolder(@NonNull HotlistAdapter.MyViewHolder holder, int position) {
+            DataHotList hotList = dataHotLists.get(position);
 
-              holder.text_name.setText(hotList.getNamee());
-              holder.text_totalJoin.setText(hotList.getTotalEarning());
+            holder.text_name.setText(hotList.getNamee());
+            holder.text_totalJoin.setText(hotList.getTotalEarning());
 
-            Log.e("444","444");
+            Log.e("444", "444");
 
             Glide.with(context).load(Uri.parse(hotList.getUserPic())).into(holder.img_user);
         }
@@ -187,23 +217,20 @@ public class HotLIst extends Fragment {
             return dataHotLists.size();
         }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder
-        {
-           private TextView text_name,text_totalJoin;
-           private ImageView img_user;
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+            private TextView text_name, text_totalJoin;
+            private ImageView img_user;
 
-            public MyViewHolder(View itemView)
-            {
+            public MyViewHolder(View itemView) {
                 super(itemView);
 
-                text_name=itemView.findViewById(R.id.user_name);
-                text_totalJoin=itemView.findViewById(R.id.text_totaljoin);
-                img_user=itemView.findViewById(R.id.img_user);
+                text_name = itemView.findViewById(R.id.user_name);
+                text_totalJoin = itemView.findViewById(R.id.text_totaljoin);
+                img_user = itemView.findViewById(R.id.img_user);
 
             }
         }
     }
-
 
 
 }

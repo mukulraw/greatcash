@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_star_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\lenovo" />
+                            <entry key="outputName" value="ic_video" />
+                            <entry key="sourceFile" value="C:\Users\mukul\Downloads\video.svg" />
                           </map>
                         </option>
                       </PersistentState>

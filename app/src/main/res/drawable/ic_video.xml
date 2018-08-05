@@ -1,0 +1,24 @@
+<vector android:height="24dp" android:viewportHeight="60"
+    android:viewportWidth="60" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#8697CB" android:pathData="M1,4h56v44h-56z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,49H0V3h58V49zM2,47h54V5H2V47z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M25,33l0,-7.046l0,-6.954l11,7z"/>
+    <path android:fillColor="#687492" android:pathData="M1,4h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M12,16H0V3h12V16zM2,14h8V5H2V14z"/>
+    <path android:fillColor="#687492" android:pathData="M1,15h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M12,27H0V14h12V27zM2,25h8v-9H2V25z"/>
+    <path android:fillColor="#687492" android:pathData="M1,26h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M12,38H0V25h12V38zM2,36h8v-9H2V36z"/>
+    <path android:fillColor="#687492" android:pathData="M1,37h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M12,49H0V36h12V49zM2,47h8v-9H2V47z"/>
+    <path android:fillColor="#687492" android:pathData="M47,4h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,16H46V3h12V16zM48,14h8V5h-8V14z"/>
+    <path android:fillColor="#687492" android:pathData="M47,15h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,27H46V14h12V27zM48,25h8v-9h-8V25z"/>
+    <path android:fillColor="#687492" android:pathData="M47,26h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,38H46V25h12V38zM48,36h8v-9h-8V36z"/>
+    <path android:fillColor="#687492" android:pathData="M47,37h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,49H46V36h12V49zM48,47h8v-9h-8V47z"/>
+    <path android:fillColor="#76C9B0" android:pathData="M49,46m-11,0a11,11 0,1 1,22 0a11,11 0,1 1,-22 0"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M55,45h-5v-5c0,-0.552 -0.447,-1 -1,-1s-1,0.448 -1,1v6c0,0.552 0.447,1 1,1h6c0.553,0 1,-0.448 1,-1S55.553,45 55,45z"/>
+</vector>

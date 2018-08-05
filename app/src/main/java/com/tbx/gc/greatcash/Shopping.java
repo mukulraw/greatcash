@@ -59,7 +59,7 @@ public class Shopping extends Fragment {
     List<Sale> list;
     ProgressBar progress;
     SharedPreferences pref;
-    TextView thisMonth , today , text , amount;
+    TextView thisMonth, today, text, amount;
 
     TextView audio;
 
@@ -72,12 +72,10 @@ public class Shopping extends Fragment {
 
         audio = view.findViewById(R.id.textView31);
 
-        HeyzapAds.start("9d60ad7678088ee38a3b8f7112199c0c", getActivity() , HeyzapAds.DISABLE_AUTOMATIC_FETCH);
+        HeyzapAds.start("9d60ad7678088ee38a3b8f7112199c0c", getActivity(), HeyzapAds.DISABLE_AUTOMATIC_FETCH);
 
 
         final NativeAd nativeAd = new NativeAd();
-
-
 
 
 // Set a listener to notify us when certain actions occur.
@@ -85,7 +83,7 @@ public class Shopping extends Fragment {
 
             @Override
             public void onAdLoaded(NativeAd nativeAd) {
-                Log.d("ttaagg" , "The ad has been loaded");
+                Log.d("ttaagg", "The ad has been loaded");
                 // This is where we will create the views to display the ad.
                 // See the next section of these docs.
                 //setupNativeAdView(nativeAd);
@@ -93,17 +91,17 @@ public class Shopping extends Fragment {
 
             @Override
             public void onAdShown(NativeAd nativeAd) {
-                Log.d("ttaagg" , "The ad was shown");
+                Log.d("ttaagg", "The ad was shown");
             }
 
             @Override
             public void onAdClicked(NativeAd nativeAd) {
-                Log.d("ttaagg" , "The ad was clicked");
+                Log.d("ttaagg", "The ad was clicked");
             }
 
             @Override
             public void onError(HeyzapAds.NativeError nativeError) {
-                Log.d("ttaagg" , "There was an error: " + nativeError.getErrorMessage());
+                Log.d("ttaagg", "There was an error: " + nativeError.getErrorMessage());
             }
         });
 
@@ -112,9 +110,6 @@ public class Shopping extends Fragment {
 
 
         list = new ArrayList<>();
-
-
-
 
 
         pref = getContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
@@ -137,7 +132,6 @@ public class Shopping extends Fragment {
 //
 //        grid.setAdapter(adapter);
 //        grid.setLayoutManager(manager);
-
 
 
         audio.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +161,7 @@ public class Shopping extends Fragment {
 
                 data.setUserId(pref.getString("id", ""));
 
-                Log.d("iidd" , pref.getString("id" , ""));
+                Log.d("iidd", pref.getString("id", ""));
 
                 body.setData(data);
 
@@ -179,8 +173,7 @@ public class Shopping extends Fragment {
                     public void onResponse(Call<audioBean> call, final Response<audioBean> response) {
 
 
-                        if (response.body().getStatus().equals("1"))
-                        {
+                        if (response.body().getStatus().equals("1")) {
 
                             final Dialog dialog = new Dialog(getActivity());
                             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -203,12 +196,9 @@ public class Shopping extends Fragment {
                                 mPlayer.prepare();
                                 mPlayer.start();
 
-                            }catch (Exception e)
-                            {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
-
 
 
                             cancel.setOnClickListener(new View.OnClickListener() {
@@ -220,8 +210,7 @@ public class Shopping extends Fragment {
 
                                         mPlayer.stop();
 
-                                    }catch (Exception e)
-                                    {
+                                    } catch (Exception e) {
                                         e.printStackTrace();
                                     }
 
@@ -255,7 +244,7 @@ public class Shopping extends Fragment {
 
                                     data.setAmount(response.body().getData().get(0).getAmount());
                                     data.setFileId(response.body().getData().get(0).getAudioId());
-                                    data.setUserId(pref.getString("id" , ""));
+                                    data.setUserId(pref.getString("id", ""));
 
                                     body.setData(data);
 
@@ -265,13 +254,12 @@ public class Shopping extends Fragment {
                                         @Override
                                         public void onResponse(Call<registerResponseBean> call, Response<registerResponseBean> response) {
 
-                                            if (response.body().getStatus().equals("1"))
-                                            {
+                                            if (response.body().getStatus().equals("1")) {
                                                 dialog.dismiss();
                                                 try {
-                                                    mediaPlayer.stop();
-                                                }catch (Exception e)
-                                                {
+                                                    mediaPlayer.reset();
+                                                    mediaPlayer.release();
+                                                } catch (Exception e) {
                                                     e.printStackTrace();
                                                 }
 
@@ -296,10 +284,9 @@ public class Shopping extends Fragment {
 
                     @Override
                     public void onFailure(Call<audioBean> call, Throwable t) {
-    progress.setVisibility(View.GONE);
+                        progress.setVisibility(View.GONE);
                     }
                 });
-
 
 
             }
@@ -343,28 +330,22 @@ public class Shopping extends Fragment {
             @Override
             public void onResponse(Call<shoppingBean> call, Response<shoppingBean> response) {
 
-                if (response.body().getStatus().equals("1"))
-                {
+                if (response.body().getStatus().equals("1")) {
 
                     thisMonth.setText("GC $ " + response.body().getData().getEarningSummary().getThismonth());
 
-                    String strtoday=response.body().getData().getEarningSummary().getToday();
-                    if(strtoday.equals(""))
-                    {
-                        today.setText("0");
+                    String strtoday = response.body().getData().getEarningSummary().getToday();
+                    if (strtoday.equals("")) {
+                        today.setText("GC $ 0");
+                    } else {
+                        today.setText("GC $ " + response.body().getData().getEarningSummary().getToday());
                     }
-                    else
-                        {
-                            today.setText("GC $" + response.body().getData().getEarningSummary().getToday());
-                        }
-
-
 
 
                     text.setText(response.body().getData().getSummary().getText());
                     amount.setText("GC $ " + response.body().getData().getSummary().getAmount());
 
-                   // adapter.setGridData(response.body().getData().getSale());
+                    // adapter.setGridData(response.body().getData().getSale());
                 }
 
                 progress.setVisibility(View.GONE);
@@ -383,7 +364,7 @@ public class Shopping extends Fragment {
 
         Context context;
         List<Sale> list = new ArrayList<>();
-        int[] ll = {R.drawable.aa,R.drawable.cc,R.drawable.bb};
+        int[] ll = {R.drawable.aa, R.drawable.cc, R.drawable.bb};
 
         private String urlList[] = {
                 "https://www.amazon.in/ap/signin?openid.return_to=https%3A%2F%2Faffiliate-program.amazon.in%2F%3Fopenid.assoc_handle%3Damzn_associates_in%26openid.claimed_id%3Dhttp%253A%252F%252Fspecs.openid.net%252Fauth%252F2.0%252Fidentifier_select%26openid.identity%3Dhttp%253A%252F%252Fspecs.openid.net%252Fauth%252F2.0%252Fidentifier_select%26openid.mode%3Dlogout%26openid.ns%3Dhttp%253A%252F%252Fspecs.openid.net%252Fauth%252F2.0%26openid.return_to%3Dhttps%253A%252F%252Faffiliate-program.amazon.in%252F%26&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=amzn_associates_in&openid.mode=checkid_setup&marketPlaceId=A21TJRUUN4KGV&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.pape.max_auth_age=0",
@@ -391,14 +372,10 @@ public class Shopping extends Fragment {
                 "http://www.cj.com/"};
 
 
-
-
 //        public SaleAdapter(Context context, List<Sale> list) {
 //            this.context = context;
 //            this.list = list;
 //        }
-
-
 
 
         public SaleAdapter(Context context) {
@@ -409,7 +386,6 @@ public class Shopping extends Fragment {
 //            this.list = list;
 //            notifyDataSetChanged();
 //        }
-
 
 
         public void setGridData(int[] ll) {
@@ -448,8 +424,8 @@ public class Shopping extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(getContext(),Shoppingweb.class);
-                    i.putExtra("url",urlList[position]);
+                    Intent i = new Intent(getContext(), Shoppingweb.class);
+                    i.putExtra("url", urlList[position]);
                     startActivity(i);
                 }
             });
@@ -459,7 +435,7 @@ public class Shopping extends Fragment {
 
         @Override
         public int getItemCount() {
-           // return list.size();
+            // return list.size();
 
             return 3;
         }
@@ -469,20 +445,14 @@ public class Shopping extends Fragment {
             RoundedImageView image;
 
 
-
             public ViewHolder(View itemView) {
                 super(itemView);
                 image = itemView.findViewById(R.id.view2);
 
 
-
-
-
-
             }
         }
     }
-
 
 
 }

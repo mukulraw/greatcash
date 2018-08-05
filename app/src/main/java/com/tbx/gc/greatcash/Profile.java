@@ -56,7 +56,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Profile extends Fragment {
 
-    TextView refId, name, phone, reedemwallet,makeselect,maleunselect,femaleselect,femaleunselect,yesselected,yesunselected,noselected,nounselected,earnMore;
+    TextView refId, name, phone, reedemwallet,makeselect,maleunselect,femaleselect,femaleunselect,yesselected,yesunselected,noselected,nounselected,earnMore , upline;
 
     ProgressBar progress;
     SharedPreferences pref;
@@ -89,6 +89,8 @@ public class Profile extends Fragment {
         dob = view.findViewById(R.id.editText4);
         nominee = view.findViewById(R.id.editText5);
         relation = view.findViewById(R.id.editText6);
+
+        upline = view.findViewById(R.id.textView61);
 
         logout = view.findViewById(R.id.textView76);
 
@@ -404,7 +406,9 @@ public class Profile extends Fragment {
                     dob.setText(response.body().getData().getBirthDate());
                     nominee.setText(response.body().getData().getNominee());
                     relation.setText(response.body().getData().getRelationNominee());
-                    earnMore.setText(response.body().getData().getEarningAmount());
+                    earnMore.setText("$ " + response.body().getData().getEarningAmount());
+
+                    upline.setText(response.body().getData().getParentId());
 
                     String img_user=response.body().getData().getUserPic();
                     Log.e("img_linkkkk",""+img_user);

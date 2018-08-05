@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:textSize="14sp"
                 android:backgroundTint="@color/gray_light"
-                android:inputType="number"
+                android:inputType="textCapCharacters"
                 android:hint="Enter Redeem Amount"/>
 
         </RelativeLayout>
@@ -135,7 +135,7 @@
                     android:id="@+id/ed_paypalID"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="number"
+                    android:inputType="textCapCharacters"
                     android:hint="Enter PayPal ID"/>
 
             </RelativeLayout>
@@ -149,7 +149,7 @@
                     android:id="@+id/ed_vikashID"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="number"
+                    android:inputType="textCapCharacters"
                     android:hint="Enter Vikash ID"/>
 
             </RelativeLayout>
@@ -164,7 +164,7 @@
                     android:id="@+id/ed_accountNumber"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="number"
+                    android:inputType="textCapCharacters"
                     android:hint="Enter Account Number"/>
 
                 <EditText
@@ -172,7 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:inputType="number"
+                    android:inputType="textCapCharacters"
                     android:hint="Enter IFSC Code"
                     android:layout_below="@+id/ed_accountNumber"/>
 
@@ -197,7 +197,7 @@
                     android:id="@+id/ed_paytm_number"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="number"
+                    android:inputType="textCapCharacters"
                     android:hint="Enter Paytm Number"/>
 
             </RelativeLayout>

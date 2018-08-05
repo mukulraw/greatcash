@@ -53,116 +53,107 @@ import retrofit2.Response;
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
-public class kyc extends Fragment
-{
-    Button  submit;
+public class kyc extends Fragment {
+    Button submit;
     ImageView iv;
     private int RESULT_LOAD_IMAGE = 1;
-    private RelativeLayout image_gallery,rel_dropDown;
+    private RelativeLayout image_gallery, rel_dropDown;
 
     ArrayList<String> permissionToRequest;
-    private final static int ALL_PERMISSIONS_RESULT=101;
-    private final static int ALL_PERMISSIONS_RESULT_DOC=102;
-    ArrayList<String> permissions =new ArrayList<>();
-    ArrayList<String> permissionsRejected=new ArrayList<>();
-    private Bitmap bitmap=null;
-    private Bitmap bitmap_doc=null;
-    private String url="http://nationproducts.in/great-cash/api/fileapi.php?";
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    private final static int ALL_PERMISSIONS_RESULT_DOC = 102;
+    ArrayList<String> permissions = new ArrayList<>();
+    ArrayList<String> permissionsRejected = new ArrayList<>();
+    private Bitmap bitmap = null;
+    private Bitmap bitmap_doc = null;
+    private String url = "http://nationproducts.in/great-cash/api/fileapi.php?";
     SharedPreferences pref;
     String id;
-    private TextView text_selectType,text_nomDOB;
+    private TextView text_selectType, text_nomDOB;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private DropDownKycAdapter adapter;
-    private String[] str_name={"Driving Licence","Pan Card","Adhar Card","Voter ID","Any Other Government ID"};
-    private ImageView img_user,img_doc;
-    private Button btn_imgUser,btn_imgDoc;
-    private EditText ed_nomName,ed_nomRelation,ed_Id;
-    private int mDay,mMonth,mYear;
+    private String[] str_name = {"Driving Licence", "Pan Card", "Adhar Card", "Voter ID", "Any Other Government ID"};
+    private ImageView img_user, img_doc;
+    private Button btn_imgUser, btn_imgDoc;
+    private EditText ed_nomName, ed_nomRelation, ed_Id;
+    private int mDay, mMonth, mYear;
     private ProgressBar progressBar;
-    private String str_selectType,str_nomineeName,str_nomineeRelarion,str_dob,str_id;
-    private String picturePathuser,picturePath_doc;
+    private String str_selectType, str_nomineeName, str_nomineeRelarion, str_dob, str_id;
+    private String picturePathuser, picturePath_doc;
     Uri fileUri = null;
-    Uri profileUri=null;
-
+    Uri profileUri = null;
 
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.kyc, container, false);
         pref = getContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
-         id= pref.getString("id" , "");
-        Log.e("user_idddd",""+id);
+        id = pref.getString("id", "");
+        Log.e("user_idddd", "" + id);
 
         submit = (Button) v.findViewById(R.id.submit);
-        rel_dropDown=(RelativeLayout)v.findViewById(R.id.rel_dropdown);
-        text_selectType=(TextView)v.findViewById(R.id.text_selected);
-        recyclerView=(RecyclerView)v.findViewById(R.id.recyclerView_dropDown);
-        progressBar =v.findViewById(R.id.progress);
+        rel_dropDown = (RelativeLayout) v.findViewById(R.id.rel_dropdown);
+        text_selectType = (TextView) v.findViewById(R.id.text_selected);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView_dropDown);
+        progressBar = v.findViewById(R.id.progress);
         recyclerView.setVisibility(View.INVISIBLE);
 
-        img_user=v.findViewById(R.id.img_user);
-        img_doc=v.findViewById(R.id.img_user_doc);
-        btn_imgUser=v.findViewById(R.id.btn_uploadUser);
-        btn_imgDoc=v.findViewById(R.id.btn_uploadDoc);
-        ed_nomName=v.findViewById(R.id.ed_nominee_nmae);
-        ed_nomRelation=v.findViewById(R.id.ed_nominee_relation);
-        ed_Id=v.findViewById(R.id.ed_Id);
-        text_nomDOB=v.findViewById(R.id.ed_nominee_dob);
+        img_user = v.findViewById(R.id.img_user);
+        img_doc = v.findViewById(R.id.img_user_doc);
+        btn_imgUser = v.findViewById(R.id.btn_uploadUser);
+        btn_imgDoc = v.findViewById(R.id.btn_uploadDoc);
+        ed_nomName = v.findViewById(R.id.ed_nominee_nmae);
+        ed_nomRelation = v.findViewById(R.id.ed_nominee_relation);
+        ed_Id = v.findViewById(R.id.ed_Id);
+        text_nomDOB = v.findViewById(R.id.ed_nominee_dob);
 
 
         permissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE);
         permissions.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        permissionToRequest=findUnAskedPermission(permissions);
+        permissionToRequest = findUnAskedPermission(permissions);
 
-        btn_imgUser.setOnClickListener(new View.OnClickListener()
-        {
+        btn_imgUser.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                View alertLayout = LayoutInflater.from(getActivity()).inflate(R.layout.choose_camera_popup,null);
-                android.app.AlertDialog.Builder alertDialog=new android.app.AlertDialog.Builder(getActivity());
+            public void onClick(View view) {
+                View alertLayout = LayoutInflater.from(getActivity()).inflate(R.layout.choose_camera_popup, null);
+                android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(getActivity());
                 alertDialog.setView(alertLayout);
-                final android.app.AlertDialog dialog=alertDialog.create();
+                final android.app.AlertDialog dialog = alertDialog.create();
 
-                RelativeLayout rel_camera,rel_gallery;
-                rel_camera=alertLayout.findViewById(R.id.rel_camera);
-                rel_gallery=alertLayout.findViewById(R.id.rel_gallery);
+                RelativeLayout rel_camera, rel_gallery;
+                rel_camera = alertLayout.findViewById(R.id.rel_camera);
+                rel_gallery = alertLayout.findViewById(R.id.rel_gallery);
 
                 rel_camera.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view)
-                    {
+                    public void onClick(View view) {
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent,3);
+                        startActivityForResult(intent, 3);
                         dialog.dismiss();
 
                     }
                 });
 
-                rel_gallery.setOnClickListener(new View.OnClickListener()
-                {
+                rel_gallery.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view)
-                    {
+                    public void onClick(View view) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 
                         {
-                    if (permissionToRequest.size() > 0)
-                    {
-                        requestPermissions(permissionToRequest.toArray(new String[permissionToRequest.size()]),
-                                ALL_PERMISSIONS_RESULT);
-                        Log.d(ContentValues.TAG, "Permission requests");
+                            if (permissionToRequest.size() > 0) {
+                                requestPermissions(permissionToRequest.toArray(new String[permissionToRequest.size()]),
+                                        ALL_PERMISSIONS_RESULT);
+                                Log.d(ContentValues.TAG, "Permission requests");
 
-                    }
-                }
+                            }
+                        }
 
-                Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,1);
-                dialog.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(intent, 1);
+                        dialog.dismiss();
 
                     }
 
@@ -175,53 +166,46 @@ public class kyc extends Fragment
         });
 
 
-        btn_imgDoc.setOnClickListener(new View.OnClickListener()
-        {
+        btn_imgDoc.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
 
-                View alertLayout = LayoutInflater.from(getActivity()).inflate(R.layout.choose_camera_popup,null);
-                android.app.AlertDialog.Builder alertDialog=new android.app.AlertDialog.Builder(getActivity());
+                View alertLayout = LayoutInflater.from(getActivity()).inflate(R.layout.choose_camera_popup, null);
+                android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(getActivity());
                 alertDialog.setView(alertLayout);
-                final android.app.AlertDialog dialog=alertDialog.create();
+                final android.app.AlertDialog dialog = alertDialog.create();
 
-                RelativeLayout rel_camera,rel_gallery;
-                rel_camera=alertLayout.findViewById(R.id.rel_camera);
-                rel_gallery=alertLayout.findViewById(R.id.rel_gallery);
+                RelativeLayout rel_camera, rel_gallery;
+                rel_camera = alertLayout.findViewById(R.id.rel_camera);
+                rel_gallery = alertLayout.findViewById(R.id.rel_gallery);
 
                 rel_camera.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view)
-                    {
+                    public void onClick(View view) {
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent,4);
+                        startActivityForResult(intent, 4);
                         dialog.dismiss();
 
 
                     }
                 });
 
-                rel_gallery.setOnClickListener(new View.OnClickListener()
-                {
+                rel_gallery.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view)
-                    {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                        {
+                    public void onClick(View view) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                         if (permissionToRequest.size() > 0)
-                    {
-                        requestPermissions(permissionToRequest.toArray(new String[permissionToRequest.size()]),
-                                ALL_PERMISSIONS_RESULT_DOC);
-                        Log.d(ContentValues.TAG, "Permission requests");
+                            if (permissionToRequest.size() > 0) {
+                                requestPermissions(permissionToRequest.toArray(new String[permissionToRequest.size()]),
+                                        ALL_PERMISSIONS_RESULT_DOC);
+                                Log.d(ContentValues.TAG, "Permission requests");
 
-                    }
-                }
+                            }
+                        }
 
-                Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,2);
-                dialog.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(intent, 2);
+                        dialog.dismiss();
 
                     }
 
@@ -234,99 +218,76 @@ public class kyc extends Fragment
         });
 
 
-        text_nomDOB.setOnClickListener(new View.OnClickListener()
-        {
+        text_nomDOB.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                final Calendar calendar=Calendar.getInstance();
-                mYear=calendar.get(Calendar.YEAR);
-                mMonth=calendar.get(Calendar.MONTH);
-                mDay=calendar.get(Calendar.DAY_OF_MONTH);
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                mYear = calendar.get(Calendar.YEAR);
+                mMonth = calendar.get(Calendar.MONTH);
+                mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
 //                Log.e("year",""+mYear);
 //                Log.e("month",""+mMonth);
 //                Log.e("date",""+mDay);
 
-                DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener()
-                {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker datePicker, int year, int monthofyear, int dayofmonth)
-                    {
-                        mYear=year;
-                        mMonth=monthofyear;
-                        mDay=dayofmonth;
+                    public void onDateSet(DatePicker datePicker, int year, int monthofyear, int dayofmonth) {
+                        mYear = year;
+                        mMonth = monthofyear;
+                        mDay = dayofmonth;
 
-                        text_nomDOB.setText(new StringBuilder().append(mYear).append("-").append(mMonth+1).append("-").append(mDay));
+                        text_nomDOB.setText(new StringBuilder().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay));
                     }
-                },mYear,mMonth,mDay);
+                }, mYear, mMonth, mDay);
                 datePickerDialog.show();
 
             }
         });
 
 
-        submit.setOnClickListener(new View.OnClickListener()
-        {
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                str_selectType=text_selectType.getText().toString();
-                 str_nomineeName=ed_nomName.getText().toString();
-                 str_nomineeRelarion=ed_nomRelation.getText().toString();
-                 str_dob=text_nomDOB.getText().toString();
-                 str_id=ed_Id.getText().toString();
+            public void onClick(View view) {
+                str_selectType = text_selectType.getText().toString();
+                str_nomineeName = ed_nomName.getText().toString();
+                str_nomineeRelarion = ed_nomRelation.getText().toString();
+                str_dob = text_nomDOB.getText().toString();
+                str_id = ed_Id.getText().toString();
 
-                if(str_nomineeName.equals(""))
-                {
-                    Toast.makeText(getActivity(),"Please enter nominee name",Toast.LENGTH_SHORT).show();
-                }
-                else if(str_nomineeRelarion.equals(""))
-                {
-                    Toast.makeText(getActivity(),"Please enter nominee relation",Toast.LENGTH_SHORT).show();
-                }
-                else if(str_dob.equals(""))
-                {
-                    Toast.makeText(getActivity(),"Please select DOB",Toast.LENGTH_SHORT).show();
-                }
-                else if(str_selectType.equals(""))
-                {
-                    Toast.makeText(getActivity(),"Please select type",Toast.LENGTH_SHORT).show();
-                }
-                else if(str_id.equals(""))
-                {
-                    Toast.makeText(getActivity(),"Please enter ID",Toast.LENGTH_SHORT).show();
-                }
-                else if(img_user.getDrawable()==null)
-                {
-                  Toast.makeText(getActivity(),"Please upload user image",Toast.LENGTH_SHORT).show();
-                }
-                else if(img_doc.getDrawable()==null)
-                {
-                    Toast.makeText(getActivity(),"Please upload doc image",Toast.LENGTH_SHORT).show();
-                }
-                else
-                    {
+                if (str_nomineeName.equals("")) {
+                    Toast.makeText(getActivity(), "Please enter nominee name", Toast.LENGTH_SHORT).show();
+                } else if (str_nomineeRelarion.equals("")) {
+                    Toast.makeText(getActivity(), "Please enter nominee relation", Toast.LENGTH_SHORT).show();
+                } else if (str_dob.equals("")) {
+                    Toast.makeText(getActivity(), "Please select DOB", Toast.LENGTH_SHORT).show();
+                } else if (str_selectType.equals("")) {
+                    Toast.makeText(getActivity(), "Please select type", Toast.LENGTH_SHORT).show();
+                } else if (str_id.equals("")) {
+                    Toast.makeText(getActivity(), "Please enter ID", Toast.LENGTH_SHORT).show();
+                } else if (img_user.getDrawable() == null) {
+                    Toast.makeText(getActivity(), "Please upload user image", Toast.LENGTH_SHORT).show();
+                } else if (img_doc.getDrawable() == null) {
+                    Toast.makeText(getActivity(), "Please upload doc image", Toast.LENGTH_SHORT).show();
+                } else {
 
-                        uploadApi();
+                    uploadApi();
 
-                        //updateKyc_Api();
-                      //  Toast.makeText(getActivity(),"ddd",Toast.LENGTH_SHORT).show();
-                    }
+                    //updateKyc_Api();
+                    //  Toast.makeText(getActivity(),"ddd",Toast.LENGTH_SHORT).show();
+                }
 
 
             }
         });
 
-        rel_dropDown.setOnClickListener(new View.OnClickListener()
-        {
+        rel_dropDown.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 recyclerView.setVisibility(View.VISIBLE);
-                layoutManager=new LinearLayoutManager(getActivity());
+                layoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(layoutManager);
-                adapter=new DropDownKycAdapter(getActivity(),str_name);
+                adapter = new DropDownKycAdapter(getActivity(), str_name);
                 recyclerView.setAdapter(adapter);
 
             }
@@ -335,8 +296,7 @@ public class kyc extends Fragment
         return v;
     }
 
-    private void uploadApi()
-    {
+    private void uploadApi() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         File file = new File(picturePathuser);
@@ -366,8 +326,7 @@ public class kyc extends Fragment
         Call<ResponseBody> responseBodyCall = apiInterface.saveData(type, action, userId, typeId, nomineeNameValue, nomineeRelValue, nomineeDobValue, body, body1);
         responseBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response)
-            {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
             }
 
@@ -379,13 +338,7 @@ public class kyc extends Fragment
     }
 
 
-
-
-
-
-
-    private void updateKyc_Api()
-    {
+    private void updateKyc_Api() {
 //        Log.e("1111", "1111");
 //        progressBar.setVisibility(View.VISIBLE);
 //
@@ -526,32 +479,25 @@ public class kyc extends Fragment
 //    }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode==3 && resultCode==RESULT_OK && null!=data)
-        {
+        if (requestCode == 3 && resultCode == RESULT_OK && null != data) {
             imageFromCamera_user(resultCode, data);
 
-            }
+        }
 
-        if(requestCode==4 && resultCode==RESULT_OK && null!=data)
-        {
+        if (requestCode == 4 && resultCode == RESULT_OK && null != data) {
             imageFromCamera_doc(resultCode, data);
         }
 
 
-
-        if(requestCode==1 && resultCode==RESULT_OK && null!=data)
-        {
+        if (requestCode == 1 && resultCode == RESULT_OK && null != data) {
             fileUri = data.getData();
             picturePathuser = getPath(getActivity(), fileUri);
-            if (picturePathuser != null)
-            {
-                Log.e("imgcamera_userrrr",""+picturePathuser);
+            if (picturePathuser != null) {
+                Log.e("imgcamera_userrrr", "" + picturePathuser);
 
-                if (picturePathuser != "")
-                {
+                if (picturePathuser != "") {
                     Bitmap bitmap = BitmapFactory.decodeFile(picturePathuser);
                     if (bitmap != null)
                         img_user.setImageBitmap(bitmap);
@@ -559,12 +505,10 @@ public class kyc extends Fragment
             }
         }
 
-        if(requestCode==2 && resultCode==RESULT_OK && null!=data)
-        {
+        if (requestCode == 2 && resultCode == RESULT_OK && null != data) {
             profileUri = data.getData();
             picturePath_doc = getPath(getActivity(), profileUri);
-            if (picturePath_doc != null)
-            {
+            if (picturePath_doc != null) {
                 if (picturePath_doc != "") {
                     Bitmap bitmap = BitmapFactory.decodeFile(picturePath_doc);
                     if (bitmap != null)
@@ -578,19 +522,16 @@ public class kyc extends Fragment
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void imageFromCamera_doc(int resultCode, Intent data)
-    {
+    private void imageFromCamera_doc(int resultCode, Intent data) {
         this.img_doc.setImageBitmap((Bitmap) data.getExtras().get("data"));
     }
 
-    private void imageFromCamera_user(int resultCode, Intent data)
-    {
+    private void imageFromCamera_user(int resultCode, Intent data) {
         this.img_user.setImageBitmap((Bitmap) data.getExtras().get("data"));
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static String getPath(final Context context, final Uri uri)
-    {
+    public static String getPath(final Context context, final Uri uri) {
 
         // check here to KITKAT or new version
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -690,8 +631,7 @@ public class kyc extends Fragment
                 .getAuthority());
     }
 
-    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs)
-    {
+    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
@@ -711,66 +651,50 @@ public class kyc extends Fragment
         return "";
     }
 
-    private ArrayList<String> findUnAskedPermission(ArrayList<String> wanted)
-    {
-        ArrayList result= new ArrayList();
-        for(String perm : wanted)
-        {
-            if(!hasPermission(perm))
-            {
+    private ArrayList<String> findUnAskedPermission(ArrayList<String> wanted) {
+        ArrayList result = new ArrayList();
+        for (String perm : wanted) {
+            if (!hasPermission(perm)) {
                 result.add(perm);
             }
         }
         return result;
     }
 
-    private boolean hasPermission(String perm)
-    {
-        if(canAskPermission())
-        {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            {
-                return (getActivity().checkSelfPermission(perm)== PackageManager.PERMISSION_GRANTED);
+    private boolean hasPermission(String perm) {
+        if (canAskPermission()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return (getActivity().checkSelfPermission(perm) == PackageManager.PERMISSION_GRANTED);
             }
         }
         return true;
     }
 
-    private boolean canAskPermission()
-    {
-        return (Build.VERSION.SDK_INT >Build.VERSION_CODES.LOLLIPOP_MR1);
+    private boolean canAskPermission() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        switch (requestCode)
-        {
-            case ALL_PERMISSIONS_RESULT:Log.d(TAG,"onRequestPermissionsResult");
+        switch (requestCode) {
+            case ALL_PERMISSIONS_RESULT:
+                Log.d(TAG, "onRequestPermissionsResult");
 
-                for(String perms: permissionToRequest)
-                {
-                    if(!hasPermission(perms))
-                    {
+                for (String perms : permissionToRequest) {
+                    if (!hasPermission(perms)) {
                         permissionsRejected.add(perms);
                     }
                 }
 
-                if(permissionsRejected.size() > 0)
-                {
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    {
-                        if(shouldShowRequestPermissionRationale(permissionsRejected.get(0)))
-                        {
+                if (permissionsRejected.size() > 0) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
                             showMessageOKCancel("These permissions are mandatory for the application. Please allow access.",
-                                    new DialogInterface.OnClickListener()
-                                    {
+                                    new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onClick(DialogInterface dialog, int which)
-                                        {
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                                            {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                                 requestPermissions(permissionsRejected.toArray(
                                                         new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
                                             }
@@ -784,8 +708,7 @@ public class kyc extends Fragment
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener)
-    {
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(getActivity())
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
@@ -794,59 +717,50 @@ public class kyc extends Fragment
                 .show();
     }
 
-    private class DropDownKycAdapter extends RecyclerView.Adapter<DropDownKycAdapter.ViewHolder>
-    {
+    private class DropDownKycAdapter extends RecyclerView.Adapter<DropDownKycAdapter.ViewHolder> {
         private Context context;
         private String[] str_Name;
 
-        public DropDownKycAdapter(FragmentActivity activity, String[] str_name)
-        {
-            this.context=activity;
-            this.str_Name=str_name;
+        public DropDownKycAdapter(FragmentActivity activity, String[] str_name) {
+            this.context = activity;
+            this.str_Name = str_name;
         }
 
         @NonNull
         @Override
-        public DropDownKycAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
-        {
-            View view = LayoutInflater.from(context).inflate(R.layout.country_icon , viewGroup , false);
+        public DropDownKycAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View view = LayoutInflater.from(context).inflate(R.layout.country_icon, viewGroup, false);
             return new ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull DropDownKycAdapter.ViewHolder viewHolder, final int i)
-        {
-          viewHolder.text_type.setText(str_Name[i]);
-          viewHolder.relative.setOnClickListener(new View.OnClickListener()
-          {
-              @Override
-              public void onClick(View view)
-              {
-                String str_type=str_Name[i];
-                  text_selectType.setText(str_type);
-                  recyclerView.setVisibility(View.GONE);
+        public void onBindViewHolder(@NonNull DropDownKycAdapter.ViewHolder viewHolder, final int i) {
+            viewHolder.text_type.setText(str_Name[i]);
+            viewHolder.relative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String str_type = str_Name[i];
+                    text_selectType.setText(str_type);
+                    recyclerView.setVisibility(View.GONE);
 
-              }
-          });
+                }
+            });
 
         }
 
         @Override
-        public int getItemCount()
-        {
+        public int getItemCount() {
             return str_Name.length;
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder
-        {
+        public class ViewHolder extends RecyclerView.ViewHolder {
             private TextView text_type;
             private RelativeLayout relative;
 
-            public ViewHolder(@NonNull View itemView)
-            {
+            public ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                text_type=itemView.findViewById(R.id.text_country_name);
-                relative=itemView.findViewById(R.id.rel);
+                text_type = itemView.findViewById(R.id.text_country_name);
+                relative = itemView.findViewById(R.id.rel);
             }
         }
     }

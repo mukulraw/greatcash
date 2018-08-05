@@ -38,202 +38,148 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * Created by Priyanka on 7/11/2018.
  */
 
-public class Redeem extends AppCompatActivity
-{
-    private RelativeLayout rel_back,rel_dropDown;
-    private String[] strName={"Paypal","bKash","Bank","Paytm"};
-    private int[] str_img={R.drawable.paypal_icon,R.drawable.bkash,R.drawable.bank_icon,R.drawable.paytm_icon};
+public class Redeem extends AppCompatActivity {
+    private RelativeLayout rel_back, rel_dropDown;
+    private String[] strName = {"Paypal", "bKash", "Bank", "Paytm"};
+    private int[] str_img = {R.drawable.paypal_icon, R.drawable.bkash, R.drawable.bank_icon, R.drawable.paytm_icon};
     private RecyclerView recyclerView_dropDown;
     private RecyclerView.LayoutManager layoutManager;
     private DropDownAdapter adapter;
     private TextView text_selpayment;
-    private RelativeLayout rel_payPal,rel_vikash,rel_bankOfIndia,rel_paytm;
+    private RelativeLayout rel_payPal, rel_vikash, rel_bankOfIndia, rel_paytm;
     private Button btn_submit;
     private String tag;
     private EditText ed_redeemAmount;
-    private EditText ed_accountNumber_B,ed_ifscCode_B,ed_enterName_B;
+    private EditText ed_accountNumber_B, ed_ifscCode_B, ed_enterName_B;
     private EditText ed_paypalID;
     private EditText ed_vikashID;
     private EditText ed_paytmID;
     SharedPreferences pref;
     String str_redeemAmount;
-    String str_acountNum,str_ifsc,str_name;
+    String str_acountNum, str_ifsc, str_name;
     String str_paypal;
     String str_vikashID;
     String str_paytm;
     ProgressBar progress;
 
 
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState)
-    {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.redeem);
 
-        pref = getApplication().getSharedPreferences("pref" , Context.MODE_PRIVATE);
+        pref = getApplication().getSharedPreferences("pref", Context.MODE_PRIVATE);
         setID();
 
-        rel_dropDown.setOnClickListener(new View.OnClickListener()
-        {
+        rel_dropDown.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 recyclerView_dropDown.setVisibility(View.VISIBLE);
-                layoutManager=new LinearLayoutManager(getApplicationContext());
+                layoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView_dropDown.setLayoutManager(layoutManager);
 
-                adapter=new DropDownAdapter(getApplicationContext(),strName,str_img);
+                adapter = new DropDownAdapter(getApplicationContext(), strName, str_img);
                 recyclerView_dropDown.setAdapter(adapter);
             }
         });
 
-        rel_back.setOnClickListener(new View.OnClickListener()
-        {
+        rel_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 finish();
             }
         });
 
-        btn_submit.setOnClickListener(new View.OnClickListener()
-        {
+        btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                str_redeemAmount=ed_redeemAmount.getText().toString();
-                Log.e("redeemamounttt",""+str_redeemAmount);
+            public void onClick(View view) {
+                str_redeemAmount = ed_redeemAmount.getText().toString();
+                Log.e("redeemamounttt", "" + str_redeemAmount);
 
-                String text_selected=text_selpayment.getText().toString();
-                Log.e("typeeeee",""+text_selected);
+                String text_selected = text_selpayment.getText().toString();
+                Log.e("typeeeee", "" + text_selected);
 
-                if(text_selected.equals(""))
-                {
-                    Toast.makeText(getApplicationContext(),"Please select type",Toast.LENGTH_SHORT).show();
-                }
+                if (text_selected.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (tag.equals("1")) {
+                        str_paypal = ed_paypalID.getText().toString();
+                        if (str_paypal.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter paypalID", Toast.LENGTH_SHORT).show();
+                        } else if (text_selected.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                        } else if (str_redeemAmount.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
+                        } else {
 
-                else
-                    {
-                        if(tag.equals("1"))
-                        {
-                            str_paypal=ed_paypalID.getText().toString();
-                            if(str_paypal.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter paypalID",Toast.LENGTH_SHORT).show();
-                            }
-
-                            else if(text_selected.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please select type",Toast.LENGTH_SHORT).show();
-                            }
-                            else if(str_redeemAmount.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter redeem amount",Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-
-                                payPal_Api();
-                            }
-
-
+                            payPal_Api();
                         }
 
-                        if(tag.equals("2"))
-                        {
-                             str_vikashID=ed_vikashID.getText().toString();
-                            if(str_vikashID.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter bKash ID",Toast.LENGTH_SHORT).show();
-                            }
-                            else if(text_selected.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please select type",Toast.LENGTH_SHORT).show();
-                            }
 
-                            else if(str_redeemAmount.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter redeem amount",Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-
-                                vikash_Api();
-                            }
-
-
-                        }
-
-                        if(tag.equals("3"))
-                        {
-                             str_acountNum=ed_accountNumber_B.getText().toString();
-                             str_ifsc=ed_ifscCode_B.getText().toString();
-                             str_name=ed_enterName_B.getText().toString();
-
-                            if(str_redeemAmount.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter redeem amount",Toast.LENGTH_SHORT).show();
-                            }
-                            else if(text_selected.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please select type",Toast.LENGTH_SHORT).show();
-                            }
-                            else if(str_acountNum.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter account number",Toast.LENGTH_SHORT).show();
-                            }
-                            else if(str_ifsc.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter ifsc code",Toast.LENGTH_SHORT).show();
-                            }
-                            else if(str_name.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter name",Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-
-                                bank_Api();
-                            }
-
-                        }
-
-                        if(tag.equals("4"))
-                        {
-                            str_paytm=ed_paytmID.getText().toString();
-
-                            if(str_paytm.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter paytm ID",Toast.LENGTH_SHORT).show();
-                            }
-                            else if(text_selected.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please select type",Toast.LENGTH_SHORT).show();
-                            }
-
-                            else if(str_redeemAmount.equals(""))
-                            {
-                                Toast.makeText(getApplicationContext(),"Please enter redeem amount",Toast.LENGTH_SHORT).show();
-                            }
-
-                            else
-                            {
-
-                                Paytm_Api();
-                            }
-
-                        }
                     }
+
+                    if (tag.equals("2")) {
+                        str_vikashID = ed_vikashID.getText().toString();
+                        if (str_vikashID.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter bKash ID", Toast.LENGTH_SHORT).show();
+                        } else if (text_selected.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                        } else if (str_redeemAmount.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            vikash_Api();
+                        }
+
+
+                    }
+
+                    if (tag.equals("3")) {
+                        str_acountNum = ed_accountNumber_B.getText().toString();
+                        str_ifsc = ed_ifscCode_B.getText().toString();
+                        str_name = ed_enterName_B.getText().toString();
+
+                        if (str_redeemAmount.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
+                        } else if (text_selected.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                        } else if (str_acountNum.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter account number", Toast.LENGTH_SHORT).show();
+                        } else if (str_ifsc.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter ifsc code", Toast.LENGTH_SHORT).show();
+                        } else if (str_name.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter name", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            bank_Api();
+                        }
+
+                    }
+
+                    if (tag.equals("4")) {
+                        str_paytm = ed_paytmID.getText().toString();
+
+                        if (str_paytm.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter paytm ID", Toast.LENGTH_SHORT).show();
+                        } else if (text_selected.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                        } else if (str_redeemAmount.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            Paytm_Api();
+                        }
+
+                    }
+                }
 
             }
         });
 
 
-        }
+    }
 
-    private void Paytm_Api()
-    {
+    private void Paytm_Api() {
 
         Log.e("1111", "1111");
         progress.setVisibility(View.VISIBLE);
@@ -271,8 +217,7 @@ public class Redeem extends AppCompatActivity
         Call<redeemBean> call = cr.redeenApi(body);
 
 
-        call.enqueue(new Callback<redeemBean>()
-        {
+        call.enqueue(new Callback<redeemBean>() {
 
             @Override
             public void onResponse(Call<redeemBean> call, Response<redeemBean> response) {
@@ -280,8 +225,7 @@ public class Redeem extends AppCompatActivity
 
                 progress.setVisibility(View.GONE);
 
-                if (response.body().getStatus_redeem().equals("1"))
-                {
+                if (response.body().getStatus_redeem().equals("1")) {
                     Toast.makeText(getApplicationContext(), "Successfully Payment Done", Toast.LENGTH_SHORT).show();
                     ed_redeemAmount.setText("");
                     ed_paytmID.setText("");
@@ -292,8 +236,7 @@ public class Redeem extends AppCompatActivity
             }
 
             @Override
-            public void onFailure(Call<redeemBean> call, Throwable t)
-            {
+            public void onFailure(Call<redeemBean> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
 
@@ -302,10 +245,9 @@ public class Redeem extends AppCompatActivity
 
     }
 
-    private void bank_Api()
-    {
+    private void bank_Api() {
         Log.e("1111", "1111");
-         progress.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.VISIBLE);
 
         bean b = (bean) getApplicationContext();
 
@@ -340,8 +282,7 @@ public class Redeem extends AppCompatActivity
         Call<redeemBean> call = cr.redeenApi(body);
 
 
-        call.enqueue(new Callback<redeemBean>()
-        {
+        call.enqueue(new Callback<redeemBean>() {
 
             @Override
             public void onResponse(Call<redeemBean> call, Response<redeemBean> response) {
@@ -349,8 +290,7 @@ public class Redeem extends AppCompatActivity
 
                 progress.setVisibility(View.GONE);
 
-                if (response.body().getStatus_redeem().equals("1"))
-                {
+                if (response.body().getStatus_redeem().equals("1")) {
                     Toast.makeText(getApplicationContext(), "Successfully Payment Done", Toast.LENGTH_SHORT).show();
                     ed_redeemAmount.setText("");
                     ed_accountNumber_B.setText("");
@@ -363,8 +303,7 @@ public class Redeem extends AppCompatActivity
             }
 
             @Override
-            public void onFailure(Call<redeemBean> call, Throwable t)
-            {
+            public void onFailure(Call<redeemBean> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
 
@@ -373,8 +312,7 @@ public class Redeem extends AppCompatActivity
 
     }
 
-    private void vikash_Api()
-    {
+    private void vikash_Api() {
 
         Log.e("1111", "1111");
         progress.setVisibility(View.VISIBLE);
@@ -412,8 +350,7 @@ public class Redeem extends AppCompatActivity
         Call<redeemBean> call = cr.redeenApi(body);
 
 
-        call.enqueue(new Callback<redeemBean>()
-        {
+        call.enqueue(new Callback<redeemBean>() {
 
             @Override
             public void onResponse(Call<redeemBean> call, Response<redeemBean> response) {
@@ -421,8 +358,7 @@ public class Redeem extends AppCompatActivity
 
                 progress.setVisibility(View.GONE);
 
-                if (response.body().getStatus_redeem().equals("1"))
-                {
+                if (response.body().getStatus_redeem().equals("1")) {
                     Toast.makeText(getApplicationContext(), "Successfully Payment Done", Toast.LENGTH_SHORT).show();
                     ed_redeemAmount.setText("");
                     ed_vikashID.setText("");
@@ -433,8 +369,7 @@ public class Redeem extends AppCompatActivity
             }
 
             @Override
-            public void onFailure(Call<redeemBean> call, Throwable t)
-            {
+            public void onFailure(Call<redeemBean> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
 
@@ -444,8 +379,7 @@ public class Redeem extends AppCompatActivity
 
     }
 
-    private void payPal_Api()
-    {
+    private void payPal_Api() {
 
         Log.e("1111", "1111");
         progress.setVisibility(View.VISIBLE);
@@ -483,8 +417,7 @@ public class Redeem extends AppCompatActivity
         Call<redeemBean> call = cr.redeenApi(body);
 
 
-        call.enqueue(new Callback<redeemBean>()
-        {
+        call.enqueue(new Callback<redeemBean>() {
 
             @Override
             public void onResponse(Call<redeemBean> call, Response<redeemBean> response) {
@@ -492,8 +425,7 @@ public class Redeem extends AppCompatActivity
 
                 progress.setVisibility(View.GONE);
 
-                if (response.body().getStatus_redeem().equals("1"))
-                {
+                if (response.body().getStatus_redeem().equals("1")) {
                     Toast.makeText(getApplicationContext(), "Successfully Payment Done", Toast.LENGTH_SHORT).show();
                     ed_redeemAmount.setText("");
                     ed_paypalID.setText("");
@@ -504,8 +436,7 @@ public class Redeem extends AppCompatActivity
             }
 
             @Override
-            public void onFailure(Call<redeemBean> call, Throwable t)
-            {
+            public void onFailure(Call<redeemBean> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
 
@@ -515,101 +446,95 @@ public class Redeem extends AppCompatActivity
     }
 
 
-    private void setID()
-    {
-        recyclerView_dropDown=findViewById(R.id.recyclerView_dropDown);
-        rel_back=findViewById(R.id.rel_back);
-        rel_dropDown=findViewById(R.id.rel_dropdown);
-        text_selpayment=findViewById(R.id.text_selected);
-        btn_submit=findViewById(R.id.rank_dialog_button);
-        ed_redeemAmount=findViewById(R.id.ed_redeemAmount);
-        progress =findViewById(R.id.progress);
+    private void setID() {
+        recyclerView_dropDown = findViewById(R.id.recyclerView_dropDown);
+        rel_back = findViewById(R.id.rel_back);
+        rel_dropDown = findViewById(R.id.rel_dropdown);
+        text_selpayment = findViewById(R.id.text_selected);
+        btn_submit = findViewById(R.id.rank_dialog_button);
+        ed_redeemAmount = findViewById(R.id.ed_redeemAmount);
+        progress = findViewById(R.id.progress);
 
-        rel_payPal=findViewById(R.id.rel_paypal);
-        rel_vikash=findViewById(R.id.rel_vikash);
-        rel_bankOfIndia=findViewById(R.id.rel_bankOfIndia);
-        rel_paytm=findViewById(R.id.rel_paytm);
+        rel_payPal = findViewById(R.id.rel_paypal);
+        rel_vikash = findViewById(R.id.rel_vikash);
+        rel_bankOfIndia = findViewById(R.id.rel_bankOfIndia);
+        rel_paytm = findViewById(R.id.rel_paytm);
 
         rel_payPal.setVisibility(View.GONE);
         rel_vikash.setVisibility(View.GONE);
         rel_bankOfIndia.setVisibility(View.GONE);
         rel_paytm.setVisibility(View.GONE);
 
-        ed_accountNumber_B=findViewById(R.id.ed_accountNumber);
-        ed_ifscCode_B=findViewById(R.id.ed_ifscCode);
-        ed_enterName_B=findViewById(R.id.ed_name);
+        ed_accountNumber_B = findViewById(R.id.ed_accountNumber);
+        ed_ifscCode_B = findViewById(R.id.ed_ifscCode);
+        ed_enterName_B = findViewById(R.id.ed_name);
 
-        ed_paypalID=findViewById(R.id.ed_paypalID);
-        ed_vikashID=findViewById(R.id.ed_vikashID);
-        ed_paytmID=findViewById(R.id.ed_paytm_number);
+        ed_paypalID = findViewById(R.id.ed_paypalID);
+        ed_vikashID = findViewById(R.id.ed_vikashID);
+        ed_paytmID = findViewById(R.id.ed_paytm_number);
     }
 
 
-
-
-    private class DropDownAdapter extends RecyclerView.Adapter<DropDownAdapter.ViewHolder>
-    {
+    private class DropDownAdapter extends RecyclerView.Adapter<DropDownAdapter.ViewHolder> {
         private Context context;
         private String[] Name;
         private int[] img;
 
-        public DropDownAdapter(Context applicationContext, String[] strName, int[] str_img)
-        {
-            this.context=applicationContext;
-            this.Name=strName;
-            this.img=str_img;
+        public DropDownAdapter(Context applicationContext, String[] strName, int[] str_img) {
+            this.context = applicationContext;
+            this.Name = strName;
+            this.img = str_img;
 
         }
 
         @NonNull
         @Override
-        public DropDownAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
-        {
-            View view = LayoutInflater.from(context).inflate(R.layout.reedem_icon , viewGroup , false);
+        public DropDownAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View view = LayoutInflater.from(context).inflate(R.layout.reedem_icon, viewGroup, false);
             return new ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull DropDownAdapter.ViewHolder viewHolder, final int i)
-        {
+        public void onBindViewHolder(@NonNull DropDownAdapter.ViewHolder viewHolder, final int i) {
             viewHolder.text_name.setText(Name[i]);
             viewHolder.image.setImageResource(img[i]);
 
-            viewHolder.rel_click.setOnClickListener(new View.OnClickListener()
-            {
+            viewHolder.rel_click.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view)
-                {
+                public void onClick(View view) {
 
-                    switch (i)
-                    {
-                        case 0: rel_payPal.setVisibility(View.VISIBLE);
+                    switch (i) {
+                        case 0:
+                            rel_payPal.setVisibility(View.VISIBLE);
                             rel_vikash.setVisibility(View.GONE);
                             rel_bankOfIndia.setVisibility(View.GONE);
                             rel_paytm.setVisibility(View.GONE);
-                            tag="1";
+                            tag = "1";
                             break;
 
-                        case 1: rel_vikash.setVisibility(View.VISIBLE);
+                        case 1:
+                            rel_vikash.setVisibility(View.VISIBLE);
                             rel_payPal.setVisibility(View.GONE);
                             rel_bankOfIndia.setVisibility(View.GONE);
                             rel_paytm.setVisibility(View.GONE);
-                            tag="2";
-                              break;
+                            tag = "2";
+                            break;
 
-                        case 2: rel_bankOfIndia.setVisibility(View.VISIBLE);
+                        case 2:
+                            rel_bankOfIndia.setVisibility(View.VISIBLE);
                             rel_vikash.setVisibility(View.GONE);
                             rel_payPal.setVisibility(View.GONE);
                             rel_paytm.setVisibility(View.GONE);
-                            tag="3";
-                             break;
+                            tag = "3";
+                            break;
 
-                        case 3:  rel_paytm.setVisibility(View.VISIBLE);
+                        case 3:
+                            rel_paytm.setVisibility(View.VISIBLE);
                             rel_bankOfIndia.setVisibility(View.GONE);
                             rel_vikash.setVisibility(View.GONE);
                             rel_payPal.setVisibility(View.GONE);
-                            tag="4";
-                               break;
+                            tag = "4";
+                            break;
 
                     }
 
@@ -618,26 +543,23 @@ public class Redeem extends AppCompatActivity
                 }
             });
 
-            }
+        }
 
         @Override
-        public int getItemCount()
-        {
+        public int getItemCount() {
             return Name.length;
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder
-        {
+        public class ViewHolder extends RecyclerView.ViewHolder {
             private TextView text_name;
             private RelativeLayout rel_click;
             private ImageView image;
 
-            public ViewHolder(@NonNull View itemView)
-            {
+            public ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                text_name=itemView.findViewById(R.id.text_country_name);
-                rel_click=itemView.findViewById(R.id.rel);
-                image=itemView.findViewById(R.id.img);
+                text_name = itemView.findViewById(R.id.text_country_name);
+                rel_click = itemView.findViewById(R.id.rel);
+                image = itemView.findViewById(R.id.img);
             }
         }
     }

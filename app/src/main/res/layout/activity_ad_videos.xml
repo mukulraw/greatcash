@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/bach_color"
     android:layout_height="match_parent"
+    android:background="@color/bach_color"
     tools:context=".WWView">
 
     <RelativeLayout
@@ -22,67 +21,105 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/back"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/back" />
 
         </RelativeLayout>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/logo" />
 
     </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rel_top"
-        >
+        android:layout_below="@+id/rel_top">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:src="@drawable/admob"
-                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
                 android:id="@+id/admob"
-                android:layout_marginTop="5dp"
-                android:background="#ffffff"
-                android:scaleType="centerInside"/>
+                android:weightSum="5">
 
-            <ImageView
+
+                <ImageView
+
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="4"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/admob" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_video" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:src="@drawable/adcolony"
-                android:padding="10dp"
-                android:id="@+id/adcolony"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="#ffffff"
-                android:scaleType="fitCenter"/>
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:id="@+id/adcolony">
 
+
+                <ImageView
+
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="4"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/adcolony" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_video" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
-
 
 
     </android.support.v4.widget.NestedScrollView>
 
 
     <ProgressBar
+        android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/progress"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </RelativeLayout>

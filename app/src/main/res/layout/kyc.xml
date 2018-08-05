@@ -202,7 +202,7 @@
             <EditText
                 android:id="@+id/ed_Id"
                 android:layout_width="match_parent"
-                android:inputType="number"
+                android:inputType="textCapCharacters"
                 android:layout_height="50dp"
                 android:imeOptions="actionNext"
                 android:hint="ID"/>

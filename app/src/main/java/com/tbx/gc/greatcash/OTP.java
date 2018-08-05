@@ -47,6 +47,10 @@ public class OTP extends AppCompatActivity implements OTPListener {
 
         o = getIntent().getStringExtra("otp");
 
+
+        Log.d("oottpp" , o);
+
+
         otp = findViewById(R.id.editText9);
         verify = findViewById(R.id.button4);
         progress = findViewById(R.id.progressBar4);

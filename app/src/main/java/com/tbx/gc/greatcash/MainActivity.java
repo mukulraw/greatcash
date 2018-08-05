@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         name.setText(pref.getString("name" , ""));
         regId.setText("Reg.ID: " + pref.getString("refId" , ""));
 
-        mobile.setText("Ph. : " + pref.getString("phone" , ""));
+        mobile.setText("Phn. : " + pref.getString("phone" , ""));
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
