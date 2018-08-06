@@ -1,5 +1,6 @@
 package com.tbx.gc.greatcash;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -29,11 +30,16 @@ public class ChangePassword extends AppCompatActivity {
     Button submit;
     ProgressBar progress;
     String id;
+    SharedPreferences pref;
+    SharedPreferences.Editor edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+
+        pref = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        edit = pref.edit();
 
         id = getIntent().getStringExtra("id");
 
@@ -61,7 +67,7 @@ public class ChangePassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String p = password.getText().toString();
+                final String p = password.getText().toString();
 
                 if (p.length() > 0)
                 {
@@ -97,6 +103,10 @@ public class ChangePassword extends AppCompatActivity {
 
                             if (response.body().getStatus().equals("1"))
                             {
+
+                                edit.putString("passwordSave", p);
+                                edit.apply();
+
                                 Toast.makeText(ChangePassword.this , response.body().getMessage() , Toast.LENGTH_SHORT).show();
                                 finish();
 

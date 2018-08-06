@@ -36,6 +36,7 @@ import com.tbx.gc.greatcash.referRequestPOJO.referRequestBean;
 import com.tbx.gc.greatcash.registerRequestPOJO.registerRequestBean;
 import com.tbx.gc.greatcash.registerResponsePOJO.registerResponseBean;
 import com.tbx.gc.greatcash.shoppingPOJO.shoppingBean;
+import com.tbx.gc.greatcash.socialRequestPOJO.socialRequestBean;
 import com.tbx.gc.greatcash.submitComboPOJO.submitComboBean;
 import com.tbx.gc.greatcash.submitSurveyPOJO.submitSurveyBean;
 import com.tbx.gc.greatcash.surveryPOJO.surveyBean;
@@ -84,6 +85,12 @@ public interface ApiInterface {
     @POST("great-cash/api/api.php")
     Call<registerResponseBean> login
             (@Body loginRequestBean body
+            );
+
+    @Headers({"Content-Type: application/json"})
+    @POST("great-cash/api/api.php")
+    Call<registerResponseBean> socialLogin
+            (@Body socialRequestBean body
             );
 
     @Headers({"Content-Type: application/json"})
@@ -280,11 +287,12 @@ public interface ApiInterface {
             @Part MultipartBody.Part file, @Part MultipartBody.Part file1);
 
     @Multipart
-    @POST("api/fileapi.php")
+    @POST("great-cash/api/fileapi.php")
     Call<ResponseBody> saveDataProfile(
-            @Part("action") RequestBody action,
-            @Part("userId") RequestBody userId,
-            @Part MultipartBody.Part file);
+            @Part("action") String action,
+            @Part("userId") String userId,
+            @Part MultipartBody.Part file
+    );
 
     @Headers({"Content-Type:application/json"})
     @POST("great-cash/api/api.php")

@@ -56,7 +56,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Profile extends Fragment {
 
-    TextView refId, name, phone, reedemwallet,makeselect,maleunselect,femaleselect,femaleunselect,yesselected,yesunselected,noselected,nounselected,earnMore , upline;
+    TextView refId, name, phone, reedemwallet, makeselect, maleunselect, femaleselect, femaleunselect, yesselected, yesunselected, noselected, nounselected, earnMore, upline;
 
     ProgressBar progress;
     SharedPreferences pref;
@@ -68,14 +68,16 @@ public class Profile extends Fragment {
     ImageView img_profile;
 
     EditText email, country, state, dob, nominee, relation;
+
+    private final int PICK_IMAGE_REQUEST2 = 2;
     Uri fileUri = null;
     String picturePathuser;
     Button btn_profileupdate;
 
     ArrayList<String> permissionToRequest;
-    ArrayList<String> permissions =new ArrayList<>();
-    ArrayList<String> permissionsRejected=new ArrayList<>();
-    private final static int ALL_PERMISSIONS_RESULT=101;
+    ArrayList<String> permissions = new ArrayList<>();
+    ArrayList<String> permissionsRejected = new ArrayList<>();
+    private final static int ALL_PERMISSIONS_RESULT = 101;
     String id;
 
     @Nullable
@@ -107,24 +109,24 @@ public class Profile extends Fragment {
         makeselect = view.findViewById(R.id.textView70);
         maleunselect = view.findViewById(R.id.textViewmalenot);
         femaleunselect = view.findViewById(R.id.textView71);
-        femaleselect  = view.findViewById(R.id.textViewfemalesel);
-        earnMore=view.findViewById(R.id.textView69);
-        btn_profileupdate=view.findViewById(R.id.btn_profileUpdate);
+        femaleselect = view.findViewById(R.id.textViewfemalesel);
+        earnMore = view.findViewById(R.id.textView69);
+        btn_profileupdate = view.findViewById(R.id.btn_profileUpdate);
 
 
-        yesselected  = view.findViewById(R.id.textView72);
-        yesunselected  = view.findViewById(R.id.textViewyesunselected);
-        nounselected  = view.findViewById(R.id.textView73);
+        yesselected = view.findViewById(R.id.textView72);
+        yesunselected = view.findViewById(R.id.textViewyesunselected);
+        nounselected = view.findViewById(R.id.textView73);
         noselected = view.findViewById(R.id.textViewnounselected);
 
-        img_profile=view.findViewById(R.id.view3);
+        img_profile = view.findViewById(R.id.view3);
 
         permissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE);
         permissions.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        permissionToRequest=findUnAskedPermission(permissions);
+        permissionToRequest = findUnAskedPermission(permissions);
 
         progress = view.findViewById(R.id.progressBar8);
-        id= pref.getString("id" , "");
+        id = pref.getString("id", "");
 
         loadData();
 
@@ -146,7 +148,6 @@ public class Profile extends Fragment {
                 maleunselect.setVisibility(View.GONE);
                 femaleselect.setVisibility(View.GONE);
                 femaleunselect.setVisibility(View.VISIBLE);
-
 
 
             }
@@ -173,64 +174,38 @@ public class Profile extends Fragment {
                 nounselected.setVisibility(View.VISIBLE);
 
 
-
             }
         });
 
-        btn_profileupdate.setOnClickListener(new View.OnClickListener()
-        {
+        btn_profileupdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+            public void onClick(View view) {
 
-                File file = new File(picturePathuser);
-                // create RequestBody instance from file
-                RequestBody requestFile =
-                        RequestBody.create(
-                                MediaType.parse(getActivity().getContentResolver().getType(fileUri)),
-                                file
-                        );
 
-                MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Select File"), PICK_IMAGE_REQUEST2);
+                //dialog.dismiss();
 
-                RequestBody action = RequestBody.create(MediaType.parse("text/plain"), "update_pic");
-                RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), "382");
-                Call<ResponseBody> responseBodyCall = apiInterface.saveDataProfile(action, userId,body);
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response)
-                    {
-                        Toast.makeText(getActivity(), "Profile updated", Toast.LENGTH_SHORT).show();
-                        loadData();
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
 
             }
         });
-
 
 
         reedemwallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            showDialog();
+                showDialog();
 
             }
         });
 
 
-        update.setOnClickListener(new View.OnClickListener()
-        {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 progress.setVisibility(View.VISIBLE);
 
 
@@ -320,7 +295,7 @@ public class Profile extends Fragment {
 
                 edit.apply();
 
-                Intent intent = new Intent(getContext() , Login.class);
+                Intent intent = new Intent(getContext(), Login.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 getActivity().finish();
@@ -329,15 +304,11 @@ public class Profile extends Fragment {
         });
 
 
-        img_profile.setOnLongClickListener(new View.OnLongClickListener()
-        {
+        img_profile.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View view)
-            {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                {
-                    if (permissionToRequest.size() > 0)
-                    {
+            public boolean onLongClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (permissionToRequest.size() > 0) {
                         requestPermissions(permissionToRequest.toArray(new String[permissionToRequest.size()]),
                                 ALL_PERMISSIONS_RESULT);
                         Log.d(ContentValues.TAG, "Permission requests");
@@ -345,8 +316,8 @@ public class Profile extends Fragment {
                     }
                 }
 
-                Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,1);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 1);
 
 
                 return false;
@@ -357,11 +328,10 @@ public class Profile extends Fragment {
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
 
-        }
+    }
 
     public void loadData() {
 
@@ -386,7 +356,7 @@ public class Profile extends Fragment {
         Data data = new Data();
 
         data.setUserId(id);
-        Log.e("idddddd_profile",""+id);
+        Log.e("idddddd_profile", "" + id);
 
         body.setData(data);
 
@@ -410,21 +380,21 @@ public class Profile extends Fragment {
 
                     upline.setText(response.body().getData().getParentId());
 
-                    String img_user=response.body().getData().getUserPic();
-                    Log.e("img_linkkkk",""+img_user);
+                    String img_user = response.body().getData().getUserPic();
 
-                    if(img_user.equals(""))
-                    {
+
+                    Log.d("image", response.body().getData().getUserPic());
+
+                    Log.e("img_linkkkk", "" + img_user);
+
+                    if (img_user.equals("")) {
                         img_profile.setImageDrawable(getResources().getDrawable(R.drawable.user_default));
+                    } else {
+                        Glide.with(getActivity()).load(Uri.parse(img_user)).into(img_profile);
                     }
-                    else
-                        {
-                            Glide.with(getActivity()).load(Uri.parse(img_user)).into(img_profile);
-                        }
 
 
-
-                    }
+                }
                 progress.setVisibility(View.GONE);
             }
 
@@ -438,14 +408,11 @@ public class Profile extends Fragment {
     }
 
 
-    public void showDialog()
-    {
+    public void showDialog() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View subView = inflater.inflate(R.layout.redemewalletaleart, null);
-        final EditText subEditText = (EditText)subView.findViewById(R.id.dialogEditTextredeem);
+        final EditText subEditText = (EditText) subView.findViewById(R.id.dialogEditTextredeem);
         final Button submit = (Button) subView.findViewById(R.id.btnTextredeem);
-
-
 
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -459,80 +426,98 @@ public class Profile extends Fragment {
             @Override
             public void onClick(View view) {
 
-                    alertDialog.dismiss();
+                alertDialog.dismiss();
 
 
             }
         });
 
 
-
         alertDialog.show();
     }
 
 
-    private ArrayList<String> findUnAskedPermission(ArrayList<String> wanted)
-    {
-        ArrayList result= new ArrayList();
-        for(String perm : wanted)
-        {
-            if(!hasPermission(perm))
-            {
+    private ArrayList<String> findUnAskedPermission(ArrayList<String> wanted) {
+        ArrayList result = new ArrayList();
+        for (String perm : wanted) {
+            if (!hasPermission(perm)) {
                 result.add(perm);
             }
         }
         return result;
     }
 
-    private boolean hasPermission(String perm)
-    {
-        if(canAskPermission())
-        {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            {
-                return (getActivity().checkSelfPermission(perm)== PackageManager.PERMISSION_GRANTED);
+    private boolean hasPermission(String perm) {
+        if (canAskPermission()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return (getActivity().checkSelfPermission(perm) == PackageManager.PERMISSION_GRANTED);
             }
         }
         return true;
     }
 
-    private boolean canAskPermission()
-    {
-        return (Build.VERSION.SDK_INT >Build.VERSION_CODES.LOLLIPOP_MR1);
+    private boolean canAskPermission() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if(requestCode==1 && resultCode==RESULT_OK && null!=data)
-        {
-            fileUri = data.getData();
-            picturePathuser = getPath(getActivity(), fileUri);
-            if (picturePathuser != null)
-            {
-                if (picturePathuser != "")
-                {
-                    Bitmap bitmap = BitmapFactory.decodeFile(picturePathuser);
-                    if (bitmap != null)
-                        img_profile.setImageBitmap(bitmap);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_IMAGE_REQUEST2 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri selectedImageUri = data.getData();
+
+            String mCurrentPhotoPath = getPath(getContext(), selectedImageUri);
+
+            Log.d("path" , mCurrentPhotoPath);
+
+            File file = new File(mCurrentPhotoPath);
+
+            RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+            final Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://nationproducts.in/")
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            final ApiInterface cr = retrofit.create(ApiInterface.class);
+
+
+/*
+
+            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+*/
+
+            MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
+
+            Log.d("iidd" , id);
+
+            Call<ResponseBody> responseBodyCall = cr.saveDataProfile("update_pic", id, body);
+            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Toast.makeText(getActivity(), "Profile updated", Toast.LENGTH_SHORT).show();
+                    loadData();
                 }
-            }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
 
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static String getPath(final Context context, final Uri uri)
-    {
-
-        // check here to KITKAT or new version
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+    private static String getPath(final Context context, final Uri uri) {
+        final boolean isKitKatOrAbove = true;
 
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
-
+        if (DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -540,17 +525,17 @@ public class Profile extends Fragment {
                 final String type = split[0];
 
                 if ("primary".equalsIgnoreCase(type)) {
-                    return Environment.getExternalStorageDirectory() + "/"
-                            + split[1];
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
+
+                // TODO handle non-primary volumes
             }
             // DownloadsProvider
             else if (isDownloadsDocument(uri)) {
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"),
-                        Long.valueOf(id));
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
                 return getDataColumn(context, contentUri, null, null);
             }
@@ -570,19 +555,15 @@ public class Profile extends Fragment {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[]{split[1]};
+                final String[] selectionArgs = new String[]{
+                        split[1]
+                };
 
-                return getDataColumn(context, contentUri, selection,
-                        selectionArgs);
+                return getDataColumn(context, contentUri, selection, selectionArgs);
             }
         }
         // MediaStore (and general)
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
-
-            // Return the remote address
-            if (isGooglePhotosUri(uri))
-                return uri.getLastPathSegment();
-
             return getDataColumn(context, uri, null, null);
         }
         // File
@@ -590,61 +571,50 @@ public class Profile extends Fragment {
             return uri.getPath();
         }
 
-        return "";
+        return null;
     }
 
-    public static boolean isExternalStorageDocument(Uri uri) {
-        return "com.android.externalstorage.documents".equals(uri
-                .getAuthority());
+    private static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
 
     /**
      * @param uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
-    public static boolean isDownloadsDocument(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri
-                .getAuthority());
+    private static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
     /**
      * @param uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
-    public static boolean isMediaDocument(Uri uri) {
-        return "com.android.providers.media.documents".equals(uri
-                .getAuthority());
+    private static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is Google Photos.
-     */
-    public static boolean isGooglePhotosUri(Uri uri) {
-        return "com.google.android.apps.photos.content".equals(uri
-                .getAuthority());
-    }
-
-    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs)
-    {
+    private static String getDataColumn(Context context, Uri uri, String selection,
+                                        String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
-        final String[] projection = {column};
+        final String[] projection = {
+                column
+        };
 
         try {
-            cursor = context.getContentResolver().query(uri, projection,
-                    selection, selectionArgs, null);
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
             if (cursor != null && cursor.moveToFirst()) {
-                final int index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(index);
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
             }
         } finally {
             if (cursor != null)
                 cursor.close();
         }
-        return "";
+        return null;
     }
-
 
 }
