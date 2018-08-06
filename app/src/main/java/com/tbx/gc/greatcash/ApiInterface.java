@@ -12,6 +12,7 @@ import com.tbx.gc.greatcash.StatePOJO.StateBean;
 import com.tbx.gc.greatcash.TicketReq.Ticketrequest;
 import com.tbx.gc.greatcash.acPOJO.acBean;
 import com.tbx.gc.greatcash.achieversPOJO.achieversBean;
+import com.tbx.gc.greatcash.affPOJO.affBean;
 import com.tbx.gc.greatcash.audioPOJO.audioBean;
 import com.tbx.gc.greatcash.challengeAcceptPOJO.challengeAcceptBean;
 import com.tbx.gc.greatcash.challengePOJO.challengeBean;
@@ -35,6 +36,8 @@ import com.tbx.gc.greatcash.redeemPOJO.redeemBean;
 import com.tbx.gc.greatcash.referRequestPOJO.referRequestBean;
 import com.tbx.gc.greatcash.registerRequestPOJO.registerRequestBean;
 import com.tbx.gc.greatcash.registerResponsePOJO.registerResponseBean;
+import com.tbx.gc.greatcash.rewardPOJO.rBean;
+import com.tbx.gc.greatcash.rewardPOJO.rewardean;
 import com.tbx.gc.greatcash.shoppingPOJO.shoppingBean;
 import com.tbx.gc.greatcash.socialRequestPOJO.socialRequestBean;
 import com.tbx.gc.greatcash.submitComboPOJO.submitComboBean;
@@ -133,6 +136,12 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     @POST("great-cash/api/api.php")
     Call<shoppingBean> shopping
+            (@Body challengeRequestBean body
+            );
+
+    @Headers({"Content-Type: application/json"})
+    @POST("great-cash/api/api.php")
+    Call<affBean> affList
             (@Body challengeRequestBean body
             );
 
@@ -298,6 +307,11 @@ public interface ApiInterface {
     @POST("great-cash/api/api.php")
     Call<QuestionBean> questionApi
             (@Body challengeRequestBean body );
+
+    @Headers({"Content-Type:application/json"})
+    @POST("great-cash/api/api.php")
+    Call<rBean> rewardAd
+            (@Body rewardean body );
 
 
     @POST("great-cash/api/api.php")

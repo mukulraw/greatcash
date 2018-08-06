@@ -27,6 +27,8 @@ import com.adcolony.sdk.AdColonyAdOptions;
 import com.adcolony.sdk.AdColonyAdSize;
 import com.adcolony.sdk.AdColonyNativeAdView;
 import com.adcolony.sdk.AdColonyNativeAdViewListener;
+import com.tbx.gc.greatcash.affPOJO.Datum;
+import com.tbx.gc.greatcash.affPOJO.affBean;
 import com.tbx.gc.greatcash.audioPOJO.audioBean;
 import com.tbx.gc.greatcash.challengeRequestPOJO.Data;
 import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
@@ -56,7 +58,7 @@ public class Shopping extends Fragment {
     RecyclerView grid;
     SaleAdapter adapter;
     GridLayoutManager manager;
-    List<Sale> list;
+    List<Datum> list;
     ProgressBar progress;
     SharedPreferences pref;
     TextView thisMonth, today, text, amount;
@@ -68,18 +70,18 @@ public class Shopping extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shopping_layout, container, false);
 
-        HeyzapAds.setGdprConsent(true, getActivity());
-
+        /*HeyzapAds.setGdprConsent(true, getActivity());
+         */
         audio = view.findViewById(R.id.textView31);
 
-        HeyzapAds.start("9d60ad7678088ee38a3b8f7112199c0c", getActivity(), HeyzapAds.DISABLE_AUTOMATIC_FETCH);
+        //HeyzapAds.start("9d60ad7678088ee38a3b8f7112199c0c", getActivity(), HeyzapAds.DISABLE_AUTOMATIC_FETCH);
 
 
-        final NativeAd nativeAd = new NativeAd();
+        //final NativeAd nativeAd = new NativeAd();
 
 
 // Set a listener to notify us when certain actions occur.
-        nativeAd.setListener(new NativeListener() {
+        /*nativeAd.setListener(new NativeListener() {
 
             @Override
             public void onAdLoaded(NativeAd nativeAd) {
@@ -107,7 +109,7 @@ public class Shopping extends Fragment {
 
 // Load the native ad with a custom tag (the tag parameter is optional).
         nativeAd.load();
-
+*/
 
         list = new ArrayList<>();
 
@@ -120,7 +122,7 @@ public class Shopping extends Fragment {
         amount = view.findViewById(R.id.textView30);
 
         progress = view.findViewById(R.id.progressBar2);
-        adapter = new SaleAdapter(getContext());
+        adapter = new SaleAdapter(getContext(), list);
         manager = new GridLayoutManager(getContext(), 1);
 
         grid.setAdapter(adapter);
@@ -348,6 +350,7 @@ public class Shopping extends Fragment {
                     // adapter.setGridData(response.body().getData().getSale());
                 }
 
+
                 progress.setVisibility(View.GONE);
 
             }
@@ -358,18 +361,55 @@ public class Shopping extends Fragment {
             }
         });
 
+
+        progress.setVisibility(View.VISIBLE);
+
+
+        challengeRequestBean body1 = new challengeRequestBean();
+
+        Data data1 = new Data();
+
+        body1.setAction("shopping_ad");
+
+        data1.setUserId(pref.getString("id", ""));
+
+        body1.setData(data);
+
+
+        Call<affBean> call1 = cr.affList(body1);
+
+        call1.enqueue(new Callback<affBean>() {
+            @Override
+            public void onResponse(Call<affBean> call, Response<affBean> response) {
+
+                if (response.body().getStatus().equals("1")) {
+                    adapter.setGridData(response.body().getData());
+                }
+
+                progress.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<affBean> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+            }
+        });
+
+
     }
 
     class SaleAdapter extends RecyclerView.Adapter<SaleAdapter.ViewHolder> {
 
         Context context;
-        List<Sale> list = new ArrayList<>();
-        int[] ll = {R.drawable.aa, R.drawable.cc, R.drawable.bb};
+        List<Datum> list = new ArrayList<>();
+        //int[] ll = {R.drawable.aa, R.drawable.cc, R.drawable.bb};
+/*
 
         private String urlList[] = {
                 "https://www.amazon.in/ap/signin?openid.return_to=https%3A%2F%2Faffiliate-program.amazon.in%2F%3Fopenid.assoc_handle%3Damzn_associates_in%26openid.claimed_id%3Dhttp%253A%252F%252Fspecs.openid.net%252Fauth%252F2.0%252Fidentifier_select%26openid.identity%3Dhttp%253A%252F%252Fspecs.openid.net%252Fauth%252F2.0%252Fidentifier_select%26openid.mode%3Dlogout%26openid.ns%3Dhttp%253A%252F%252Fspecs.openid.net%252Fauth%252F2.0%26openid.return_to%3Dhttps%253A%252F%252Faffiliate-program.amazon.in%252F%26&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=amzn_associates_in&openid.mode=checkid_setup&marketPlaceId=A21TJRUUN4KGV&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.pape.max_auth_age=0",
                 "https://sessions.viglink.com/sign-in",
                 "http://www.cj.com/"};
+*/
 
 
 //        public SaleAdapter(Context context, List<Sale> list) {
@@ -378,8 +418,9 @@ public class Shopping extends Fragment {
 //        }
 
 
-        public SaleAdapter(Context context) {
+        public SaleAdapter(Context context, List<Datum> list) {
             this.context = context;
+            this.list = list;
         }
 
 //        public void setGridData(List<Sale> list) {
@@ -388,8 +429,8 @@ public class Shopping extends Fragment {
 //        }
 
 
-        public void setGridData(int[] ll) {
-            this.ll = ll;
+        public void setGridData(List<Datum> list) {
+            this.list = list;
             notifyDataSetChanged();
         }
 
@@ -404,28 +445,23 @@ public class Shopping extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
+
+            final Datum item = list.get(position);
 //            Sale item = list.get(position);
-//
-//            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true).resetViewBeforeLoading(false).build();
-//
-//            ImageLoader loader = ImageLoader.getInstance();
-//
-//            loader.displayImage(item.getImage(), holder.image, options);
 
-            holder.image.setImageResource(ll[position]);
+            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true).resetViewBeforeLoading(false).build();
 
-//            for (int i =0;i<ll.size();i++)
-//            {
-//                holder.webView.loadUrl(ll.get(i));
-//                context.setContentView(holder.webView);
-//
-//            }
+            ImageLoader loader = ImageLoader.getInstance();
+
+            loader.displayImage(item.getThumbnail(), holder.image, options);
+
+            holder.textView.setText("Shop to earn $ " + item.getAmount());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(getContext(), Shoppingweb.class);
-                    i.putExtra("url", urlList[position]);
+                    i.putExtra("url", item.getAffilateUrl());
                     startActivity(i);
                 }
             });
@@ -437,19 +473,18 @@ public class Shopping extends Fragment {
         public int getItemCount() {
             // return list.size();
 
-            return 3;
+            return list.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
             RoundedImageView image;
-
+            TextView textView;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 image = itemView.findViewById(R.id.view2);
-
-
+                textView = itemView.findViewById(R.id.textView116);
             }
         }
     }
