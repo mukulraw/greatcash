@@ -14,6 +14,15 @@ public class Datum {
     @SerializedName("joiningEmail")
     @Expose
     private String joiningEmail;
+    @SerializedName("joiningPhone")
+    @Expose
+    private String joiningPhone;
+    @SerializedName("joiningRefId")
+    @Expose
+    private String joiningRefId;
+    @SerializedName("joiningPic")
+    @Expose
+    private String joiningPic;
     @SerializedName("joiningDate")
     @Expose
     private String joiningDate;
@@ -40,6 +49,30 @@ public class Datum {
 
     public void setJoiningEmail(String joiningEmail) {
         this.joiningEmail = joiningEmail;
+    }
+
+    public String getJoiningPhone() {
+        return joiningPhone;
+    }
+
+    public void setJoiningPhone(String joiningPhone) {
+        this.joiningPhone = joiningPhone;
+    }
+
+    public String getJoiningRefId() {
+        return joiningRefId;
+    }
+
+    public void setJoiningRefId(String joiningRefId) {
+        this.joiningRefId = joiningRefId;
+    }
+
+    public String getJoiningPic() {
+        return joiningPic;
+    }
+
+    public void setJoiningPic(String joiningPic) {
+        this.joiningPic = joiningPic;
     }
 
     public String getJoiningDate() {

@@ -96,82 +96,97 @@ public class Redeem extends AppCompatActivity {
                 str_redeemAmount = ed_redeemAmount.getText().toString();
                 Log.e("redeemamounttt", "" + str_redeemAmount);
 
-                String text_selected = text_selpayment.getText().toString();
-                Log.e("typeeeee", "" + text_selected);
 
-                if (text_selected.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (tag.equals("1")) {
-                        str_paypal = ed_paypalID.getText().toString();
-                        if (str_paypal.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter paypalID", Toast.LENGTH_SHORT).show();
-                        } else if (text_selected.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
-                        } else if (str_redeemAmount.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
-                        } else {
 
-                            payPal_Api();
+                float am = Float.parseFloat(str_redeemAmount);
+
+                if (am > 10)
+                {
+                    String text_selected = text_selpayment.getText().toString();
+                    Log.e("typeeeee", "" + text_selected);
+
+                    if (text_selected.equals("")) {
+                        Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (tag.equals("1")) {
+                            str_paypal = ed_paypalID.getText().toString();
+                            if (str_paypal.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter paypalID", Toast.LENGTH_SHORT).show();
+                            } else if (text_selected.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                            } else if (str_redeemAmount.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                payPal_Api();
+                            }
+
+
                         }
 
+                        if (tag.equals("2")) {
+                            str_vikashID = ed_vikashID.getText().toString();
+                            if (str_vikashID.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter bKash ID", Toast.LENGTH_SHORT).show();
+                            } else if (text_selected.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                            } else if (str_redeemAmount.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
+                            } else {
 
-                    }
+                                vikash_Api();
+                            }
 
-                    if (tag.equals("2")) {
-                        str_vikashID = ed_vikashID.getText().toString();
-                        if (str_vikashID.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter bKash ID", Toast.LENGTH_SHORT).show();
-                        } else if (text_selected.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
-                        } else if (str_redeemAmount.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
-                        } else {
 
-                            vikash_Api();
                         }
 
+                        if (tag.equals("3")) {
+                            str_acountNum = ed_accountNumber_B.getText().toString();
+                            str_ifsc = ed_ifscCode_B.getText().toString();
+                            str_name = ed_enterName_B.getText().toString();
 
-                    }
+                            if (str_redeemAmount.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
+                            } else if (text_selected.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                            } else if (str_acountNum.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter account number", Toast.LENGTH_SHORT).show();
+                            } else if (str_ifsc.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter ifsc code", Toast.LENGTH_SHORT).show();
+                            } else if (str_name.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter name", Toast.LENGTH_SHORT).show();
+                            } else {
 
-                    if (tag.equals("3")) {
-                        str_acountNum = ed_accountNumber_B.getText().toString();
-                        str_ifsc = ed_ifscCode_B.getText().toString();
-                        str_name = ed_enterName_B.getText().toString();
+                                bank_Api();
+                            }
 
-                        if (str_redeemAmount.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
-                        } else if (text_selected.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
-                        } else if (str_acountNum.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter account number", Toast.LENGTH_SHORT).show();
-                        } else if (str_ifsc.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter ifsc code", Toast.LENGTH_SHORT).show();
-                        } else if (str_name.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter name", Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            bank_Api();
                         }
 
-                    }
+                        if (tag.equals("4")) {
+                            str_paytm = ed_paytmID.getText().toString();
 
-                    if (tag.equals("4")) {
-                        str_paytm = ed_paytmID.getText().toString();
+                            if (str_paytm.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter paytm ID", Toast.LENGTH_SHORT).show();
+                            } else if (text_selected.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
+                            } else if (str_redeemAmount.equals("")) {
+                                Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
+                            } else {
 
-                        if (str_paytm.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter paytm ID", Toast.LENGTH_SHORT).show();
-                        } else if (text_selected.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please select type", Toast.LENGTH_SHORT).show();
-                        } else if (str_redeemAmount.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please enter redeem amount", Toast.LENGTH_SHORT).show();
-                        } else {
+                                Paytm_Api();
+                            }
 
-                            Paytm_Api();
                         }
-
                     }
                 }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "MInimum amount to redeem is $10", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
 
             }
         });

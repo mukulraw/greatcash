@@ -18,6 +18,12 @@ public class Datum
     @SerializedName("refId")
     @Expose
     private String refId;
+    @SerializedName("joinDate")
+    @Expose
+    private String joinDate;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
 
     public String getUserId() {
         return userId;
@@ -51,4 +57,19 @@ public class Datum
         this.refId = refId;
     }
 
+    public String getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

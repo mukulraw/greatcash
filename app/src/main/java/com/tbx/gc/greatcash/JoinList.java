@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tbx.gc.greatcash.networkPOJO.Datum;
 import com.tbx.gc.greatcash.networkPOJO.networkBean;
 import com.tbx.gc.greatcash.networkRequestOJO.Data;
@@ -174,6 +177,12 @@ progress.setVisibility(View.GONE);
             viewHolder.name.setText(item.getJoiningName());
             viewHolder.email.setText(item.getJoiningEmail());
 
+            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
+
+            ImageLoader loader = ImageLoader.getInstance();
+
+            loader.displayImage(item.getJoiningPic() , viewHolder.image , options);
+
         }
 
         @Override
@@ -185,12 +194,14 @@ progress.setVisibility(View.GONE);
         {
 
             TextView name , email;
+            RoundedImageView image;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
 
                 name = itemView.findViewById(R.id.textView109);
                 email = itemView.findViewById(R.id.textView110);
+                image = itemView.findViewById(R.id.view8);
 
             }
         }
