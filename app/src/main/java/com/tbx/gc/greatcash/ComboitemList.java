@@ -43,6 +43,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
 import com.tbx.gc.greatcash.comboPOJO.ComboItem;
 import com.tbx.gc.greatcash.comboPOJO.comboBean;
+import com.tbx.gc.greatcash.offerRequestPOHO.offerRequestBean;
 import com.tbx.gc.greatcash.registerResponsePOJO.registerResponseBean;
 import com.tbx.gc.greatcash.submitComboPOJO.Data;
 import com.tbx.gc.greatcash.submitComboPOJO.submitComboBean;
@@ -76,6 +77,8 @@ public class ComboitemList extends AppCompatActivity {
 
     ComboAdapter adapter;
 
+    String countryId;
+
     ImageButton back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,6 +91,7 @@ public class ComboitemList extends AppCompatActivity {
         dones = new ArrayList<>();
 
         id = getIntent().getStringExtra("id");
+        countryId = getIntent().getStringExtra("cid");
         grid = findViewById(R.id.grid);
         progress = findViewById(R.id.progressBar17);
         manager = new GridLayoutManager(this, 1);
@@ -132,13 +136,14 @@ public class ComboitemList extends AppCompatActivity {
 
         ApiInterface cr = retrofit.create(ApiInterface.class);
 
-        challengeRequestBean body = new challengeRequestBean();
+        offerRequestBean body = new offerRequestBean();
 
-        com.tbx.gc.greatcash.challengeRequestPOJO.Data data = new com.tbx.gc.greatcash.challengeRequestPOJO.Data();
+        com.tbx.gc.greatcash.offerRequestPOHO.Data data = new com.tbx.gc.greatcash.offerRequestPOHO.Data();
 
         body.setAction("combo_offer");
 
         data.setUserId(pref.getString("id", ""));
+        data.setCountryId(countryId);
 
         Log.d("iidd", pref.getString("id", ""));
 

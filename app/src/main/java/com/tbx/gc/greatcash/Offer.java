@@ -19,11 +19,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
 import com.tbx.gc.greatcash.comboPOJO.ComboItem;
 import com.tbx.gc.greatcash.comboPOJO.Datum;
 import com.tbx.gc.greatcash.comboPOJO.comboBean;
+import com.tbx.gc.greatcash.offerRequestPOHO.offerRequestBean;
 import com.tbx.gc.greatcash.transactionRequestPOJO.Data;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -63,15 +67,13 @@ public class Offer extends Fragment {
     List<Datum> list;
     ProgressBar progress;
     SharedPreferences pref;
-    private RelativeLayout rel_country;
-    private TextView text_countryName;
-    private RecyclerView recyclerView_country;
-    private RecyclerView.LayoutManager layoutManager;
-    private AlertDialog dialog;
-    private ProgressBar progressBar_country;
-    private CountryAdapter countryAdapter;
-    private List<DataCountry> countryList = new ArrayList<>();
 
+
+    private List<String> countryList = new ArrayList<>();
+    private List<String> countryId = new ArrayList<>();
+
+    String cid;
+    Spinner spinner;
 
     @Nullable
     @Override
@@ -85,9 +87,8 @@ public class Offer extends Fragment {
 
         grid = view.findViewById(R.id.grid);
         progress = view.findViewById(R.id.progress);
-        rel_country = view.findViewById(R.id.rel_search);
-        text_countryName = view.findViewById(R.id.text_country);
 
+        spinner = view.findViewById(R.id.spinner);
         manager = new GridLayoutManager(getContext(), 1);
 
         adapter = new OfferAdapter(getActivity(), list);
@@ -97,40 +98,28 @@ public class Offer extends Fragment {
         grid.setAdapter(adapter);
 
 
-        rel_country.setOnClickListener(new View.OnClickListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                LayoutInflater layoutInflater = getLayoutInflater();
-                View alertLayout = layoutInflater.inflate(R.layout.country_dialog, null);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                alertDialog.setView(alertLayout);
-                dialog = alertDialog.create();
+                loadData(countryId.get(i));
+                cid = countryId.get(i);
 
+            }
 
-                recyclerView_country = alertLayout.findViewById(R.id.recyclerView_country);
-                progressBar_country = alertLayout.findViewById(R.id.progressBar_country);
-
-
-                layoutManager = new LinearLayoutManager(getActivity());
-                recyclerView_country.setLayoutManager(layoutManager);
-
-                countryAdapter = new CountryAdapter(getActivity(), countryList);
-                recyclerView_country.setAdapter(countryAdapter);
-
-                country_Api();
-
-                dialog.show();
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
+
 
         return view;
 
     }
 
     private void country_Api() {
-        progressBar_country.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.VISIBLE);
 
         bean b = (bean) getContext().getApplicationContext();
 
@@ -161,12 +150,22 @@ public class Offer extends Fragment {
             public void onResponse(Call<countryBean> call, Response<countryBean> response) {
                 Log.e("222", "222");
 
-                progressBar_country.setVisibility(View.GONE);
+                progress.setVisibility(View.GONE);
 
                 if (response.body().getStatus_country().equals("1")) {
 
-                    countryAdapter.setGridData(response.body().getData_country());
-                    Log.e("3333", "3333");
+                    for (int i = 0; i < response.body().getData_country().size(); i++) {
+                        countryList.add(response.body().getData_country().get(i).getCountryName());
+                        countryId.add(response.body().getData_country().get(i).getCountry_id());
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                            android.R.layout.simple_list_item_1, countryList);
+
+
+                    spinner.setAdapter(adapter);
+
+
                 }
 
                 //progress.setVisibility(View.GONE);
@@ -174,7 +173,7 @@ public class Offer extends Fragment {
 
             @Override
             public void onFailure(Call<countryBean> call, Throwable t) {
-                progressBar_country.setVisibility(View.GONE);
+                progress.setVisibility(View.GONE);
             }
         });
 
@@ -186,10 +185,11 @@ public class Offer extends Fragment {
     public void onResume() {
         super.onResume();
 
-        loadData();
+        country_Api();
+
     }
 
-    public void loadData() {
+    public void loadData(String countryId) {
 
 
         progress.setVisibility(View.VISIBLE);
@@ -206,13 +206,15 @@ public class Offer extends Fragment {
 
         ApiInterface cr = retrofit.create(ApiInterface.class);
 
-        challengeRequestBean body = new challengeRequestBean();
+        offerRequestBean body = new offerRequestBean();
 
-        com.tbx.gc.greatcash.challengeRequestPOJO.Data data = new com.tbx.gc.greatcash.challengeRequestPOJO.Data();
+        com.tbx.gc.greatcash.offerRequestPOHO.Data data = new com.tbx.gc.greatcash.offerRequestPOHO.Data();
 
         body.setAction("combo_offer");
 
         data.setUserId(pref.getString("id", ""));
+
+        data.setCountryId(countryId);
 
         Log.d("iidd", pref.getString("id", ""));
 
@@ -303,9 +305,9 @@ public class Offer extends Fragment {
                 public void onClick(View view) {
 
 
-
-                    Intent intent = new Intent(context , ComboitemList.class);
-                    intent.putExtra("id" , item.getComboId());
+                    Intent intent = new Intent(context, ComboitemList.class);
+                    intent.putExtra("id", item.getComboId());
+                    intent.putExtra("cid", cid);
                     context.startActivity(intent);
 
                 }
@@ -336,64 +338,4 @@ public class Offer extends Fragment {
         }
     }
 
-
-    private class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
-        private Context context;
-        private List<DataCountry> dataCountryList;
-
-        public CountryAdapter(FragmentActivity activity, List<DataCountry> countryList) {
-            this.context = activity;
-            this.dataCountryList = countryList;
-
-        }
-
-        public void setGridData(List<DataCountry> list) {
-            this.dataCountryList = list;
-            notifyDataSetChanged();
-        }
-
-        @NonNull
-        @Override
-        public CountryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view = LayoutInflater.from(context).inflate(R.layout.country_icon, viewGroup, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder viewHolder, int i) {
-            final DataCountry item = dataCountryList.get(i);
-
-            viewHolder.text_countryName.setText(item.getCountryName());
-            Log.e("textname", "" + item.getCountryName());
-
-            viewHolder.relative.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String countryName = item.getCountryName();
-                    text_countryName.setText(countryName);
-
-                    // countryID=item.getCountry_id();
-
-                    dialog.dismiss();
-                }
-            });
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return dataCountryList.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            private TextView text_countryName;
-            private RelativeLayout relative;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                text_countryName = itemView.findViewById(R.id.text_country_name);
-                relative = itemView.findViewById(R.id.rel);
-            }
-        }
-    }
 }

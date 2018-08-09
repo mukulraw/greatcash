@@ -30,6 +30,7 @@ import com.tbx.gc.greatcash.loginRequestPOJO.loginRequestBean;
 import com.tbx.gc.greatcash.networkPOJO.networkBean;
 import com.tbx.gc.greatcash.networkRequestOJO.networkRequestBean;
 import com.tbx.gc.greatcash.notificaitonPOJO.notificationBean;
+import com.tbx.gc.greatcash.offerRequestPOHO.offerRequestBean;
 import com.tbx.gc.greatcash.passwordRequestPOJO.passwordRequestBean;
 import com.tbx.gc.greatcash.rateUsPojo.rateUsBean;
 import com.tbx.gc.greatcash.redeemPOJO.redeemBean;
@@ -229,7 +230,7 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     @POST("great-cash/api/api.php")
     Call<comboBean> comboOffers
-            (@Body challengeRequestBean body
+            (@Body offerRequestBean body
             );
 
     @Headers({"Content-Type: application/json"})
