@@ -98,7 +98,7 @@ public class OTP extends AppCompatActivity implements OTPListener {
                             if (response.body().getStatus().equals("1"))
                             {
 
-                                edit.putString("id" , response.body().getData().getUserId());
+                                //edit.putString("id" , response.body().getData().getUserId());
                                 edit.putString("refId" , response.body().getData().getRefId());
                                 edit.putString("parentId" , response.body().getData().getParentId());
                                 edit.putString("name" , response.body().getData().getName());

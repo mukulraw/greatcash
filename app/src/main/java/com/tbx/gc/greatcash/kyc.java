@@ -35,8 +35,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.tbx.gc.greatcash.challengeRequestPOJO.Data;
+import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
+import com.tbx.gc.greatcash.viewKYCPOJO.viewKYCBean;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,6 +55,9 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
@@ -84,6 +93,9 @@ public class kyc extends Fragment {
     Uri fileUri = null;
     Uri profileUri = null;
 
+    ScrollView scroll;
+    TextView status;
+
 
     @Nullable
     @Override
@@ -100,6 +112,9 @@ public class kyc extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView_dropDown);
         progressBar = v.findViewById(R.id.progress);
         recyclerView.setVisibility(View.INVISIBLE);
+
+        scroll = v.findViewById(R.id.scroll);
+        status = v.findViewById(R.id.status);
 
         img_user = v.findViewById(R.id.img_user);
         img_doc = v.findViewById(R.id.img_user_doc);
@@ -477,6 +492,85 @@ public class kyc extends Fragment {
 //        RequestQueue requestQueue=Volley.newRequestQueue(getActivity());
 //        requestQueue.add(stringRequest);
 //    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        progressBar.setVisibility(View.VISIBLE);
+
+
+        bean b = (bean) getContext().getApplicationContext();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(b.BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        ApiInterface cr = retrofit.create(ApiInterface.class);
+
+        challengeRequestBean body = new challengeRequestBean();
+
+        Data data = new Data();
+
+        body.setAction("user_kyc");
+
+        data.setUserId(pref.getString("id", ""));
+
+        body.setData(data);
+
+        Call<viewKYCBean> call = cr.viewKyc(body);
+
+        call.enqueue(new Callback<viewKYCBean>() {
+            @Override
+            public void onResponse(Call<viewKYCBean> call, Response<viewKYCBean> response) {
+
+
+
+                if (response.body().getStatus().equals("1"))
+                {
+                    if (response.body().getData().getStatus().equals("Approved"))
+                    {
+                        scroll.setVisibility(View.GONE);
+                        status.setText("Your KYC has been approved");
+                        status.setVisibility(View.VISIBLE);
+                    }
+                    else if (response.body().getData().getStatus().equals("Reject"))
+                    {
+                        scroll.setVisibility(View.VISIBLE);
+                        status.setText("Your KYC has been rejected");
+                        status.setVisibility(View.VISIBLE);
+                    }
+                    else if (response.body().getData().getStatus().equals("Pending"))
+                    {
+                        scroll.setVisibility(View.GONE);
+                        status.setText("Your KYC is pending");
+                        status.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        scroll.setVisibility(View.VISIBLE);
+                        status.setVisibility(View.GONE);
+                    }
+                }
+
+                progressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<viewKYCBean> call, Throwable t) {
+
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

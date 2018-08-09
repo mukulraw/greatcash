@@ -80,6 +80,8 @@ public class Profile extends Fragment {
     private final static int ALL_PERMISSIONS_RESULT = 101;
     String id;
 
+    TextView uplinePhone;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class Profile extends Fragment {
         dob = view.findViewById(R.id.editText4);
         nominee = view.findViewById(R.id.editText5);
         relation = view.findViewById(R.id.editText6);
+        uplinePhone = view.findViewById(R.id.textView60);
 
         upline = view.findViewById(R.id.textView61);
 
@@ -378,7 +381,8 @@ public class Profile extends Fragment {
                     relation.setText(response.body().getData().getRelationNominee());
                     earnMore.setText("$ " + response.body().getData().getEarningAmount());
 
-                    upline.setText(response.body().getData().getParentId());
+                    upline.setText(response.body().getData().getUplinerRef());
+                    uplinePhone.setText(response.body().getData().getUplinerPhone());
 
                     String img_user = response.body().getData().getUserPic();
 

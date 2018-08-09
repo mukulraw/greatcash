@@ -12,32 +12,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class TransactionHistory extends Fragment
-{
-    CardView joining , earnMore , video , shop,survey_card;
+public class TransactionHistory extends Fragment {
+    CardView joining, earnMore, video, shop, survey_card, offer;
     SharedPreferences pref;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.hirtoryfragment , container , false);
+        View view = inflater.inflate(R.layout.hirtoryfragment, container, false);
 
-        pref = getContext().getSharedPreferences("pref" , Context.MODE_PRIVATE);
+        pref = getContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
         joining = view.findViewById(R.id.joining);
         earnMore = view.findViewById(R.id.earn_more);
         video = view.findViewById(R.id.video);
         shop = view.findViewById(R.id.shop);
-        survey_card=view.findViewById(R.id.survey);
+        survey_card = view.findViewById(R.id.survey);
+        offer = view.findViewById(R.id.offer);
 
         joining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                Intent intent = new Intent(getContext() , TrasnsactionList.class);
-                intent.putExtra("userId" , pref.getString("id" , ""));
-                intent.putExtra("type" , "joining");
+                Intent intent = new Intent(getContext(), TrasnsactionList.class);
+                intent.putExtra("userId", pref.getString("id", ""));
+                intent.putExtra("type", "joining");
                 startActivity(intent);
 
 
@@ -49,9 +49,9 @@ public class TransactionHistory extends Fragment
             public void onClick(View view) {
 
 
-                Intent intent = new Intent(getContext() , TrasnsactionList.class);
-                intent.putExtra("userId" , pref.getString("id" , ""));
-                intent.putExtra("type" , "earn_more");
+                Intent intent = new Intent(getContext(), TrasnsactionList.class);
+                intent.putExtra("userId", pref.getString("id", ""));
+                intent.putExtra("type", "earn_more");
                 startActivity(intent);
 
 
@@ -63,9 +63,9 @@ public class TransactionHistory extends Fragment
             public void onClick(View view) {
 
 
-                Intent intent = new Intent(getContext() , TrasnsactionList.class);
-                intent.putExtra("userId" , pref.getString("id" , ""));
-                intent.putExtra("type" , "video");
+                Intent intent = new Intent(getContext(), TrasnsactionList.class);
+                intent.putExtra("userId", pref.getString("id", ""));
+                intent.putExtra("type", "video");
                 startActivity(intent);
 
 
@@ -77,26 +77,34 @@ public class TransactionHistory extends Fragment
             public void onClick(View view) {
 
 
-                Intent intent = new Intent(getContext() , TrasnsactionList.class);
-                intent.putExtra("userId" , pref.getString("id" , ""));
-                intent.putExtra("type" , "shop");
+                Intent intent = new Intent(getContext(), TrasnsactionList.class);
+                intent.putExtra("userId", pref.getString("id", ""));
+                intent.putExtra("type", "shop");
                 startActivity(intent);
 
 
             }
         });
 
-        survey_card.setOnClickListener(new View.OnClickListener()
-        {
+        survey_card.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), TrasnsactionList.class);
+                intent.putExtra("userId", pref.getString("id", ""));
+                intent.putExtra("type", "survey");
+                startActivity(intent);
             }
         });
 
-
-
+        offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), TrasnsactionList.class);
+                intent.putExtra("userId", pref.getString("id", ""));
+                intent.putExtra("type", "offer");
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

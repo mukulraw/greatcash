@@ -65,6 +65,12 @@ public class Data {
     @SerializedName("earningAmount")
     @Expose
     private String earningAmount;
+    @SerializedName("uplinerRef")
+    @Expose
+    private String uplinerRef;
+    @SerializedName("uplinerPhone")
+    @Expose
+    private String uplinerPhone;
 
     public String getUserId() {
         return userId;
@@ -224,6 +230,22 @@ public class Data {
 
     public void setEarningAmount(String earningAmount) {
         this.earningAmount = earningAmount;
+    }
+
+    public String getUplinerRef() {
+        return uplinerRef;
+    }
+
+    public void setUplinerRef(String uplinerRef) {
+        this.uplinerRef = uplinerRef;
+    }
+
+    public String getUplinerPhone() {
+        return uplinerPhone;
+    }
+
+    public void setUplinerPhone(String uplinerPhone) {
+        this.uplinerPhone = uplinerPhone;
     }
 
 }

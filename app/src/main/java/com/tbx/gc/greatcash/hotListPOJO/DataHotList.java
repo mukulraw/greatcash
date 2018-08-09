@@ -12,52 +12,38 @@ public class DataHotList
     @SerializedName("userId")
     @Expose
     private String userId;
-
     @SerializedName("name")
     @Expose
     private String name;
-
     @SerializedName("userPic")
     @Expose
     private String userPic;
-
+    @SerializedName("userPhone")
+    @Expose
+    private String userPhone;
+    @SerializedName("userRef")
+    @Expose
+    private String userRef;
     @SerializedName("totalEarning")
     @Expose
     private String totalEarning;
-
-    public String getTotalEarning() {
-        return totalEarning;
-    }
-
-    public void setTotalEarning(String totalEarning) {
-        this.totalEarning = totalEarning;
-    }
-
-    public String getUserLevel() {
-        return userLevel;
-    }
-
-    public void setUserLevel(String userLevel) {
-        this.userLevel = userLevel;
-    }
-
-    @SerializedName("userLavel")
+    @SerializedName("totalJoin")
     @Expose
-    private String userLevel;
+    private String totalJoin;
 
-    public String getUserIdd() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserIdd(String userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public String getNamee() {
+    public String getName() {
         return name;
     }
 
-    public void setNamee(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -69,10 +55,37 @@ public class DataHotList
         this.userPic = userPic;
     }
 
+    public String getUserPhone() {
+        return userPhone;
+    }
 
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
 
+    public String getUserRef() {
+        return userRef;
+    }
 
+    public void setUserRef(String userRef) {
+        this.userRef = userRef;
+    }
 
+    public String getTotalEarning() {
+        return totalEarning;
+    }
+
+    public void setTotalEarning(String totalEarning) {
+        this.totalEarning = totalEarning;
+    }
+
+    public String getTotalJoin() {
+        return totalJoin;
+    }
+
+    public void setTotalJoin(String totalJoin) {
+        this.totalJoin = totalJoin;
+    }
 
 
 }

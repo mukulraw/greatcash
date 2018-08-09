@@ -73,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
+        android:visibility="gone"
         android:layout_marginTop="32dp"
         android:text="Pleasr contact your sponser before proceeding further"
         android:textAlignment="center"
@@ -100,7 +101,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="If you don't know any sponser,ID then"
+        android:text="Use this referral Id if you don't have any: GC0000012321"
         android:textColor="#444444"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,12 +135,12 @@
         android:id="@+id/textView84"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="Call us @"
         android:textColor="#444444"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView82" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView85" />
 
     <TextView
         android:id="@+id/textView85"
@@ -148,7 +149,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:autoLink="email"
-        android:text="email@emial.com"
+        android:text="help@greatcash.co"
         android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView83" />
@@ -157,13 +158,13 @@
         android:id="@+id/textView86"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:autoLink="phone"
-        android:text="1234567890"
+        android:text="Ind +91 7750909233,Ban +96898105307"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView84" />
+        app:layout_constraintStart_toEndOf="@+id/textView84"
+        app:layout_constraintTop_toBottomOf="@+id/textView85" />
 
     <ProgressBar
         android:id="@+id/progressBar5"

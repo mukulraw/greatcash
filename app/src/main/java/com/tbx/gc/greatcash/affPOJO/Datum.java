@@ -10,12 +10,12 @@ public class Datum {
     @SerializedName("affilateUrl")
     @Expose
     private String affilateUrl;
+    @SerializedName("affilateThumbnail")
+    @Expose
+    private String affilateThumbnail;
     @SerializedName("amount")
     @Expose
     private String amount;
-    @SerializedName("thumbnail")
-    @Expose
-    private String thumbnail;
 
     public String getAffilateId() {
         return affilateId;
@@ -33,6 +33,14 @@ public class Datum {
         this.affilateUrl = affilateUrl;
     }
 
+    public String getAffilateThumbnail() {
+        return affilateThumbnail;
+    }
+
+    public void setAffilateThumbnail(String affilateThumbnail) {
+        this.affilateThumbnail = affilateThumbnail;
+    }
+
     public String getAmount() {
         return amount;
     }
@@ -41,11 +49,4 @@ public class Datum {
         this.amount = amount;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
 }

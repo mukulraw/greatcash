@@ -85,12 +85,15 @@
         <activity android:name=".ComboitemList" />
         <activity android:name=".YTTest" />
         <activity android:name=".AdVideos" />
-        <activity android:name=".Ranking"/>
+        <activity android:name=".Ranking" />
+
         <receiver android:name="swarajsaaj.smscodereader.receivers.OtpReader">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".TicketHistory"></activity>
     </application>
 
 </manifest>

@@ -43,11 +43,13 @@ import com.tbx.gc.greatcash.socialRequestPOJO.socialRequestBean;
 import com.tbx.gc.greatcash.submitComboPOJO.submitComboBean;
 import com.tbx.gc.greatcash.submitSurveyPOJO.submitSurveyBean;
 import com.tbx.gc.greatcash.surveryPOJO.surveyBean;
+import com.tbx.gc.greatcash.ticketHistoryPOJO.ticketHistoryBean;
 import com.tbx.gc.greatcash.transactionPOJO.transactionBean;
 import com.tbx.gc.greatcash.transactionRequestPOJO.transactionRequetBean;
 import com.tbx.gc.greatcash.verifyOtpRequestPOJO.cerifyOtpRequestBean;
 import com.tbx.gc.greatcash.videoAmountPOJO.videoAmountBean;
 import com.tbx.gc.greatcash.videoPOJO.videoBean;
+import com.tbx.gc.greatcash.viewKYCPOJO.viewKYCBean;
 
 import java.util.Map;
 
@@ -142,6 +144,18 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     @POST("great-cash/api/api.php")
     Call<affBean> affList
+            (@Body challengeRequestBean body
+            );
+
+    @Headers({"Content-Type: application/json"})
+    @POST("great-cash/api/api.php")
+    Call<ticketHistoryBean> ticketHistory
+            (@Body challengeRequestBean body
+            );
+
+    @Headers({"Content-Type: application/json"})
+    @POST("great-cash/api/api.php")
+    Call<viewKYCBean> viewKyc
             (@Body challengeRequestBean body
             );
 

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/date"
             android:textSize="16sp"
-            android:text="Joing Between 1st March-20th March"
+            android:text="Joining in last one month"
             android:drawableStart="@drawable/ic_c"
             android:drawablePadding="10dp"
             android:padding="18dp"

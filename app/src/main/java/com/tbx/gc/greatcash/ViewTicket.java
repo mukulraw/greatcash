@@ -1,6 +1,7 @@
 package com.tbx.gc.greatcash;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -129,6 +130,16 @@ public class ViewTicket extends Fragment {
             }
         });
 
+
+        btn_recentTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getContext() , TicketHistory.class);
+                startActivity(intent);
+
+            }
+        });
 
         return view;
     }

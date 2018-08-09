@@ -10,6 +10,12 @@ public class Datum {
     @SerializedName("userPic")
     @Expose
     private String userPic;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+    @SerializedName("refId")
+    @Expose
+    private String refId;
     @SerializedName("rank")
     @Expose
     private String rank;
@@ -28,6 +34,22 @@ public class Datum {
 
     public void setUserPic(String userPic) {
         this.userPic = userPic;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
     }
 
     public String getRank() {

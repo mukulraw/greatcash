@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -162,8 +163,11 @@ public class Ac extends Fragment {
             ImageLoader loader = ImageLoader.getInstance();
             loader.displayImage(item.getUserPic() , holder.image , options);
 
+            loader.displayImage(item.getRank() , holder.icon , options);
+
             holder.name.setText(item.getUserName());
-            holder.title.setText(item.getRank());
+            holder.mobile.setText(item.getPhone());
+            holder.refId.setText(item.getRefId());
 
 
         }
@@ -175,14 +179,17 @@ public class Ac extends Fragment {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            TextView name , title;
+            TextView name , mobile , refId;
             RoundedImageView image;
+            ImageView icon;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
-                name = itemView.findViewById(R.id.textView122);
-                title = itemView.findViewById(R.id.textView121);
+                name = itemView.findViewById(R.id.textView124);
+                mobile = itemView.findViewById(R.id.textView121);
                 image = itemView.findViewById(R.id.view7);
+                refId = itemView.findViewById(R.id.textView122);
+                icon = itemView.findViewById(R.id.imageView10);
             }
         }
     }

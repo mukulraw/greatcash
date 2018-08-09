@@ -77,7 +77,7 @@ public class HotLIst extends Fragment {
         grid.setAdapter(adapter);
 
 
-        Calendar aCalendar = Calendar.getInstance();
+        /*Calendar aCalendar = Calendar.getInstance();
         aCalendar.set(Calendar.DATE, 1);
         aCalendar.add(Calendar.DAY_OF_MONTH, -1);
         Date lastDateOfPreviousMonth = aCalendar.getTime();
@@ -103,7 +103,7 @@ public class HotLIst extends Fragment {
 
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
 
@@ -204,8 +204,12 @@ public class HotLIst extends Fragment {
         public void onBindViewHolder(@NonNull HotlistAdapter.MyViewHolder holder, int position) {
             DataHotList hotList = dataHotLists.get(position);
 
-            holder.text_name.setText(hotList.getNamee());
-            holder.text_totalJoin.setText(hotList.getTotalEarning());
+            holder.text_name.setText(hotList.getName());
+            holder.text_totalJoin.setText(hotList.getTotalJoin());
+
+            holder.refid.setText("Ref. Id " + hotList.getUserRef());
+
+            holder.phone.setText("Phn. " + hotList.getUserPhone());
 
             Log.e("444", "444");
 
@@ -218,7 +222,7 @@ public class HotLIst extends Fragment {
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            private TextView text_name, text_totalJoin;
+            private TextView text_name, text_totalJoin , refid , phone;
             private ImageView img_user;
 
             public MyViewHolder(View itemView) {
@@ -227,6 +231,8 @@ public class HotLIst extends Fragment {
                 text_name = itemView.findViewById(R.id.user_name);
                 text_totalJoin = itemView.findViewById(R.id.text_totaljoin);
                 img_user = itemView.findViewById(R.id.img_user);
+                refid = itemView.findViewById(R.id.refid);
+                phone = itemView.findViewById(R.id.phone);
 
             }
         }

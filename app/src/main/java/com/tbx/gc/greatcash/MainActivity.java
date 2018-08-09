@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         name.setText(pref.getString("name" , ""));
-        regId.setText("Reg.ID: " + pref.getString("refId" , ""));
+        regId.setText("Ref.ID: " + pref.getString("refId" , ""));
 
         mobile.setText("Phn. : " + pref.getString("phone" , ""));
 

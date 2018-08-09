@@ -453,7 +453,7 @@ public class Shopping extends Fragment {
 
             ImageLoader loader = ImageLoader.getInstance();
 
-            loader.displayImage(item.getThumbnail(), holder.image, options);
+            loader.displayImage(item.getAffilateThumbnail(), holder.image, options);
 
             holder.textView.setText("Shop to earn $ " + item.getAmount());
 
