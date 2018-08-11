@@ -31,11 +31,14 @@ public class ReferId extends AppCompatActivity {
     ProgressBar progress;
     SharedPreferences pref;
     SharedPreferences.Editor edit;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refer_id);
+
+        uid = getIntent().getStringExtra("uid");
 
         pref = getSharedPreferences("pref" , Context.MODE_PRIVATE);
         edit = pref.edit();
@@ -73,7 +76,7 @@ public class ReferId extends AppCompatActivity {
 
                     Data data = new Data();
 
-                    data.setUserId(pref.getString("id" , ""));
+                    data.setUserId(uid);
                     data.setRefer(r);
 
                     body.setData(data);

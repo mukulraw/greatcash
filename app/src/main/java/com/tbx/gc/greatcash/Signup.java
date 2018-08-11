@@ -367,6 +367,7 @@ public class Signup extends AppCompatActivity implements LocationListener {
 
                                                             Intent intent = new Intent(Signup.this , OTP.class);
                                                             intent.putExtra("otp" , response.body().getData().getOtp());
+                                                            intent.putExtra("uid" , response.body().getData().getUserId());
                                                             startActivity(intent);
                                                             finish();
 

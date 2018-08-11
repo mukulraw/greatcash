@@ -34,6 +34,7 @@ public class OTP extends AppCompatActivity implements OTPListener {
     SharedPreferences pref;
     SharedPreferences.Editor edit;
 
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class OTP extends AppCompatActivity implements OTPListener {
         edit = pref.edit();
 
         o = getIntent().getStringExtra("otp");
+        uid = getIntent().getStringExtra("uid");
 
 
         Log.d("oottpp" , o);
@@ -86,7 +88,7 @@ public class OTP extends AppCompatActivity implements OTPListener {
                     Data data = new Data();
 
                     data.setOtp(ot);
-                    data.setUserId(pref.getString("id" , ""));
+                    data.setUserId(uid);
                     body.setData(data);
 
                     Call<registerResponseBean> call = cr.verifyOtp(body);
@@ -114,6 +116,7 @@ public class OTP extends AppCompatActivity implements OTPListener {
 
 
                                 Intent intent = new Intent(OTP.this , ReferId.class);
+                                intent.putExtra("uid" , response.body().getData().getUserId());
                                 startActivity(intent);
                                 finish();
 
