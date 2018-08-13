@@ -100,7 +100,7 @@ public class Redeem extends AppCompatActivity {
 
                 float am = Float.parseFloat(str_redeemAmount);
 
-                if (am > 10)
+                if (am >= 20)
                 {
                     String text_selected = text_selpayment.getText().toString();
                     Log.e("typeeeee", "" + text_selected);

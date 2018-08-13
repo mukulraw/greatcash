@@ -62,7 +62,7 @@ public class Profile extends Fragment {
     SharedPreferences pref;
     SharedPreferences.Editor edit;
 
-    TextView logout;
+    TextView logout , joinings;
 
     Button update;
     ImageView img_profile;
@@ -94,6 +94,7 @@ public class Profile extends Fragment {
         nominee = view.findViewById(R.id.editText5);
         relation = view.findViewById(R.id.editText6);
         uplinePhone = view.findViewById(R.id.textView60);
+        joinings = view.findViewById(R.id.textView66);
 
         upline = view.findViewById(R.id.textView61);
 
@@ -383,6 +384,8 @@ public class Profile extends Fragment {
 
                     upline.setText(response.body().getData().getUplinerRef());
                     uplinePhone.setText(response.body().getData().getUplinerPhone());
+
+                    joinings.setText(response.body().getData().getTotalJoin());
 
                     String img_user = response.body().getData().getUserPic();
 

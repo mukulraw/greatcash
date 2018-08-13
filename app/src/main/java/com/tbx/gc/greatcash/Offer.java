@@ -102,9 +102,13 @@ public class Offer extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                loadData(countryId.get(i));
-                cid = countryId.get(i);
+                if (i > 0)
+                {
 
+                    loadData(countryId.get(i - 1));
+                    cid = countryId.get(i - 1);
+
+                }
             }
 
             @Override
@@ -151,6 +155,11 @@ public class Offer extends Fragment {
                 Log.e("222", "222");
 
                 progress.setVisibility(View.GONE);
+
+
+                countryList.clear();
+
+                countryList.add("Select Country");
 
                 if (response.body().getStatus_country().equals("1")) {
 

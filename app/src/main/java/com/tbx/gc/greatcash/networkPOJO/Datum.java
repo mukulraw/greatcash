@@ -26,6 +26,9 @@ public class Datum {
     @SerializedName("joiningDate")
     @Expose
     private String joiningDate;
+    @SerializedName("challengeStatus")
+    @Expose
+    private String challengeStatus;
 
     public String getJoiningId() {
         return joiningId;
@@ -81,6 +84,14 @@ public class Datum {
 
     public void setJoiningDate(String joiningDate) {
         this.joiningDate = joiningDate;
+    }
+
+    public String getChallengeStatus() {
+        return challengeStatus;
+    }
+
+    public void setChallengeStatus(String challengeStatus) {
+        this.challengeStatus = challengeStatus;
     }
 
 }

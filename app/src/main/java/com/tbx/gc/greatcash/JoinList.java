@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -74,14 +75,11 @@ public class JoinList extends AppCompatActivity {
         });
 
 
-
-        manager = new GridLayoutManager(this , 1);
-        adapter = new JoinAdapter(this , list);
+        manager = new GridLayoutManager(this, 1);
+        adapter = new JoinAdapter(this, list);
 
         grid.setAdapter(adapter);
         grid.setLayoutManager(manager);
-
-
 
 
     }
@@ -123,10 +121,9 @@ public class JoinList extends AppCompatActivity {
             @Override
             public void onResponse(Call<networkBean> call, Response<networkBean> response) {
 
-                Log.e("qwerty",""+response.body().getData());
+                Log.e("qwerty", "" + response.body().getData());
 
-                if (response.body().getStatus().equals("1"))
-                {
+                if (response.body().getStatus().equals("1")) {
                     adapter.setGridData(response.body().getData());
                 }
 
@@ -135,37 +132,32 @@ public class JoinList extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<networkBean> call, Throwable t) {
-progress.setVisibility(View.GONE);
+                progress.setVisibility(View.GONE);
             }
         });
 
 
-
     }
 
-    class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.ViewHolder>
-    {
+    class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.ViewHolder> {
         List<Datum> list = new ArrayList<>();
         Context context;
 
-        public JoinAdapter(Context context , List<Datum> list)
-        {
+        public JoinAdapter(Context context, List<Datum> list) {
             this.context = context;
             this.list = list;
         }
 
-        public void setGridData(List<Datum> list)
-        {
+        public void setGridData(List<Datum> list) {
             this.list = list;
             notifyDataSetChanged();
         }
 
         @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
-        {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.join_list_model , viewGroup , false);
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.join_list_model, viewGroup, false);
             return new ViewHolder(view);
         }
 
@@ -174,14 +166,31 @@ progress.setVisibility(View.GONE);
 
             Datum item = list.get(i);
 
+
+            if (item.getChallengeStatus().equals("Green"))
+            {
+                viewHolder.card.setCardBackgroundColor(Color.parseColor("#FF2E8B20"));
+                viewHolder.status.setText("Active");
+            }
+            else
+            {
+                viewHolder.card.setCardBackgroundColor(Color.parseColor("#FFA11515"));
+                viewHolder.status.setText("Pending");
+            }
+
+            viewHolder.refid.setText("Ref. Id : " + item.getJoiningRefId());
+
             viewHolder.name.setText(item.getJoiningName());
-            viewHolder.email.setText(item.getJoiningEmail());
+            viewHolder.email.setText("Email : " + item.getJoiningEmail());
+
+            viewHolder.phone.setText("Phn. : " + item.getJoiningPhone());
+
 
             DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
 
             ImageLoader loader = ImageLoader.getInstance();
 
-            loader.displayImage(item.getJoiningPic() , viewHolder.image , options);
+            loader.displayImage(item.getJoiningPic(), viewHolder.image, options);
 
         }
 
@@ -190,11 +199,12 @@ progress.setVisibility(View.GONE);
             return list.size();
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder
-        {
+        class ViewHolder extends RecyclerView.ViewHolder {
 
-            TextView name , email;
+            TextView name, email, phone, refid, status;
             RoundedImageView image;
+
+            CardView card;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -202,6 +212,10 @@ progress.setVisibility(View.GONE);
                 name = itemView.findViewById(R.id.textView109);
                 email = itemView.findViewById(R.id.textView110);
                 image = itemView.findViewById(R.id.view8);
+                card = itemView.findViewById(R.id.card);
+                phone = itemView.findViewById(R.id.textView129);
+                refid = itemView.findViewById(R.id.textView130);
+                status = itemView.findViewById(R.id.textView131);
 
             }
         }

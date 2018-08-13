@@ -101,7 +101,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Use this referral Id if you don't have any: GC0000012321"
+        android:text="Use this referral Id if you don't have any: GC0001"
         android:textColor="#444444"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

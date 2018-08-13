@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="3dp"
+    android:id="@+id/card"
     app:cardUseCompatPadding="true">
 
     <android.support.constraint.ConstraintLayout
@@ -16,10 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
             android:text="TextView"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView110"
             app:layout_constraintStart_toEndOf="@+id/view8"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,14 +28,12 @@
             android:id="@+id/textView110"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/textView129"
             app:layout_constraintStart_toEndOf="@+id/view8"
-            app:layout_constraintTop_toBottomOf="@+id/textView109"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintTop_toBottomOf="@+id/textView109" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/view8"
@@ -42,12 +41,46 @@
             android:layout_height="100dp"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
+            android:background="#ffffff"
             android:layout_marginTop="8dp"
-            app:riv_corner_radius="3dp"
             android:src="@drawable/user_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="3dp" />
+
+        <TextView
+            android:id="@+id/textView129"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/textView130"
+            app:layout_constraintStart_toEndOf="@+id/view8"
+            app:layout_constraintTop_toBottomOf="@+id/textView110" />
+
+        <TextView
+            android:id="@+id/textView130"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view8"
+            app:layout_constraintTop_toBottomOf="@+id/textView129" />
+
+        <TextView
+            android:id="@+id/textView131"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

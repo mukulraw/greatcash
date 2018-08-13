@@ -32,7 +32,9 @@ import com.tbx.gc.greatcash.affPOJO.affBean;
 import com.tbx.gc.greatcash.audioPOJO.audioBean;
 import com.tbx.gc.greatcash.challengeRequestPOJO.Data;
 import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
+import com.tbx.gc.greatcash.offerEarnRequestPOJO.offerEarnBean;
 import com.tbx.gc.greatcash.registerResponsePOJO.registerResponseBean;
+import com.tbx.gc.greatcash.shoppingCountPOJO.shoppingCountBean;
 import com.tbx.gc.greatcash.shoppingPOJO.Sale;
 import com.tbx.gc.greatcash.shoppingPOJO.shoppingBean;
 import com.tbx.gc.greatcash.videoAmountPOJO.videoAmountBean;
@@ -460,9 +462,52 @@ public class Shopping extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(getContext(), Shoppingweb.class);
-                    i.putExtra("url", item.getAffilateUrl());
-                    startActivity(i);
+
+
+
+                    progress.setVisibility(View.VISIBLE);
+
+
+                    bean b = (bean) context.getApplicationContext();
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(b.BASE_URL)
+                            .addConverterFactory(ScalarsConverterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+
+                    ApiInterface cr = retrofit.create(ApiInterface.class);
+
+                    shoppingCountBean body = new shoppingCountBean();
+                    body.setAction("shopping_ad_count");
+                    com.tbx.gc.greatcash.shoppingCountPOJO.Data data = new com.tbx.gc.greatcash.shoppingCountPOJO.Data();
+                    data.setAffilateId(item.getAffilateId());
+                    data.setUserId(pref.getString("id", ""));
+                    body.setData(data);
+
+
+                    Call<offerEarnBean> call = cr.shoppingCount(body);
+                    call.enqueue(new Callback<offerEarnBean>() {
+                        @Override
+                        public void onResponse(Call<offerEarnBean> call, Response<offerEarnBean> response) {
+
+                            if (response.body().getStatus().equals("1"))
+                            {
+                                Intent i = new Intent(getContext(), Shoppingweb.class);
+                                i.putExtra("url", item.getAffilateUrl());
+                                startActivity(i);
+                            }
+                            progress.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onFailure(Call<offerEarnBean> call, Throwable t) {
+                            progress.setVisibility(View.GONE);
+                        }
+                    });
+
+
                 }
             });
 

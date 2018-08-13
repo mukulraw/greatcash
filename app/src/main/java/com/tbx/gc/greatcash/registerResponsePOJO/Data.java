@@ -65,6 +65,9 @@ public class Data {
     @SerializedName("earningAmount")
     @Expose
     private String earningAmount;
+    @SerializedName("totalJoin")
+    @Expose
+    private String totalJoin;
     @SerializedName("uplinerRef")
     @Expose
     private String uplinerRef;
@@ -232,6 +235,14 @@ public class Data {
         this.earningAmount = earningAmount;
     }
 
+    public String getTotalJoin() {
+        return totalJoin;
+    }
+
+    public void setTotalJoin(String totalJoin) {
+        this.totalJoin = totalJoin;
+    }
+
     public String getUplinerRef() {
         return uplinerRef;
     }
@@ -247,5 +258,4 @@ public class Data {
     public void setUplinerPhone(String uplinerPhone) {
         this.uplinerPhone = uplinerPhone;
     }
-
 }

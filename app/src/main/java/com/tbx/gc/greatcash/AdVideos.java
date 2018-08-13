@@ -55,7 +55,7 @@ public class AdVideos extends AppCompatActivity implements RewardedVideoAdListen
 
         MobileAds.initialize(this, "ca-app-pub-3940256099942544/5224354917");
 
-        AdColony.configure(this, "appff5f6196e8c64c63aa", "vz560c17c1b60147b8bd");
+        AdColony.configure(this, "app1d33adaa4da141189b", "vz779e4eb8ede841a0b6");
 
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(AdVideos.this);
@@ -155,7 +155,7 @@ public class AdVideos extends AppCompatActivity implements RewardedVideoAdListen
 /** Set reward listener for your app to be alerted of reward events */
                 AdColony.setRewardListener(listener2);
 
-                AdColony.requestInterstitial("vz560c17c1b60147b8bd", listener);
+                AdColony.requestInterstitial("vz779e4eb8ede841a0b6", listener);
 
 
             }

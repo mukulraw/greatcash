@@ -18,13 +18,16 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.tbx.gc.greatcash.challengePOJO.Datum;
+
 import com.tbx.gc.greatcash.challengePOJO.challengeBean;
+
 import com.tbx.gc.greatcash.challengeRequestPOJO.Data;
 import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.tbx.gc.greatcash.offerPOJO.Datum;
+import com.tbx.gc.greatcash.offerPOJO.offerBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,17 +96,17 @@ public class SimpleOffer extends Fragment {
 
         Data data = new Data();
 
-        body.setAction("challenge");
+        body.setAction("single_offer");
 
         data.setUserId(pref.getString("id", ""));
 
         body.setData(data);
 
-        Call<challengeBean> call = cr.challenge(body);
+        Call<offerBean> call = cr.offers(body);
 
-        call.enqueue(new Callback<challengeBean>() {
+        call.enqueue(new Callback<offerBean>() {
             @Override
-            public void onResponse(Call<challengeBean> call, Response<challengeBean> response) {
+            public void onResponse(Call<offerBean> call, Response<offerBean> response) {
 
                 if (response.body().getStatus().equals("1"))
                 {
@@ -114,7 +117,7 @@ public class SimpleOffer extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<challengeBean> call, Throwable t) {
+            public void onFailure(Call<offerBean> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
         });
@@ -156,32 +159,20 @@ public class SimpleOffer extends Fragment {
 
             ImageLoader loader = ImageLoader.getInstance();
 
-            loader.displayImage(item.getTaskImage(), holder.image, options);
+            loader.displayImage(item.getOfferImage(), holder.image, options);
 
             holder.price.setText("$ " + item.getAmount());
 
-            Log.d("package" , item.getTaskPackage());
+            Log.d("package" , item.getOfferkPackage());
 
-            if (item.getTastStatus().equals("1"))
+            if (isPackageInstalled(context , item.getOfferkPackage()))
             {
-                holder.status.setText("DONE");
+                holder.status.setText("INSTALLED");
             }
             else
             {
-                if (isPackageInstalled(context , item.getTaskPackage()))
-                {
-                    holder.status.setText("INSTALLED");
-                }
-                else
-                {
-                    holder.status.setText("INSTALL NOW");
-                }
-
+                holder.status.setText("INSTALL NOW");
             }
-
-
-
-
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -191,9 +182,11 @@ public class SimpleOffer extends Fragment {
                     {
 
                         Intent intent = new Intent(context , InstallApp.class);
-                        intent.putExtra("image" , item.getTaskImage());
-                        intent.putExtra("name" , item.getTaskUrl());
-                        intent.putExtra("package" , item.getTaskPackage());
+                        intent.putExtra("image" , item.getOfferImage());
+                        intent.putExtra("name" , item.getOfferkPackage());
+                        intent.putExtra("package" , item.getOfferkPackage());
+                        intent.putExtra("id" , item.getOfferId());
+                        intent.putExtra("amount" , item.getAmount());
 
                         context.startActivity(intent);
 
