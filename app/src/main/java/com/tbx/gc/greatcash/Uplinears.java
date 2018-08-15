@@ -166,6 +166,8 @@ public class Uplinears extends Fragment {
             holder.name.setText(item.getName());
             holder.amount.setText(item.getPhone());
             holder.date.setText(item.getJoinDate());
+            holder.refid.setText("Ref. Id : " + item.getRefId());
+
 
 
         }
@@ -177,7 +179,7 @@ public class Uplinears extends Fragment {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            TextView name , amount , date;
+            TextView name , amount , date , refid;
             RoundedImageView image;
 
             public MyViewHolder(View itemView) {
@@ -186,6 +188,7 @@ public class Uplinears extends Fragment {
                 amount = itemView.findViewById(R.id.textView100);
                 image = itemView.findViewById(R.id.view4);
                 date = itemView.findViewById(R.id.textView123);
+                refid = itemView.findViewById(R.id.textView137);
             }
         }
     }

@@ -56,6 +56,7 @@ public class Wallat extends Fragment {
             public void onClick(View view)
             {
                 Intent intent=new Intent(getActivity(),Redeem.class);
+                intent.putExtra("amount" , str_totalAmount);
                 startActivity(intent);
 
             }

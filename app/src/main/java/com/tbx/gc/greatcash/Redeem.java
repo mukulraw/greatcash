@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,7 +26,12 @@ import com.tbx.gc.greatcash.RedeemRequest.DataRedReq;
 import com.tbx.gc.greatcash.RedeemRequest.RedeemReqBean;
 import com.tbx.gc.greatcash.challengeRequestPOJO.Data;
 import com.tbx.gc.greatcash.challengeRequestPOJO.challengeRequestBean;
+import com.tbx.gc.greatcash.redeemHistoryPOJO.Datum;
+import com.tbx.gc.greatcash.redeemHistoryPOJO.redeemHistoryBean;
 import com.tbx.gc.greatcash.redeemPOJO.redeemBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,11 +68,21 @@ public class Redeem extends AppCompatActivity {
     String str_paytm;
     ProgressBar progress;
 
+    RecyclerView grid;
+    GridLayoutManager manager;
+    List<Datum> list;
+    RedeemAdapter redeemAdapter;
+
+    String amo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.redeem);
+
+        list = new ArrayList<>();
+
+        amo = getIntent().getStringExtra("amount");
 
         pref = getApplication().getSharedPreferences("pref", Context.MODE_PRIVATE);
         setID();
@@ -90,6 +106,14 @@ public class Redeem extends AppCompatActivity {
             }
         });
 
+
+        grid = findViewById(R.id.grid);
+        manager = new GridLayoutManager(this , 1);
+        redeemAdapter = new RedeemAdapter(this , list);
+
+        grid.setAdapter(redeemAdapter);
+        grid.setLayoutManager(manager);
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,10 +121,11 @@ public class Redeem extends AppCompatActivity {
                 Log.e("redeemamounttt", "" + str_redeemAmount);
 
 
+                float amp = Float.parseFloat(amo);
 
                 float am = Float.parseFloat(str_redeemAmount);
 
-                if (am >= 20)
+                if (am >= 20 && am <= amp)
                 {
                     String text_selected = text_selpayment.getText().toString();
                     Log.e("typeeeee", "" + text_selected);
@@ -181,7 +206,7 @@ public class Redeem extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "MInimum amount to redeem is $10", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter an amount between $ 20 and $ " + amp, Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -578,4 +603,117 @@ public class Redeem extends AppCompatActivity {
             }
         }
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        progress.setVisibility(View.VISIBLE);
+
+
+        bean b = (bean) getApplicationContext();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(b.BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        ApiInterface cr = retrofit.create(ApiInterface.class);
+
+        challengeRequestBean body = new challengeRequestBean();
+
+        Data data = new Data();
+
+        body.setAction("redeem_history");
+
+        data.setUserId(pref.getString("id", ""));
+
+        body.setData(data);
+
+        Call<redeemHistoryBean> call = cr.redeemHistory(body);
+
+        call.enqueue(new Callback<redeemHistoryBean>() {
+            @Override
+            public void onResponse(Call<redeemHistoryBean> call, Response<redeemHistoryBean> response) {
+
+
+                if (response.body().getStatus().equals("1"))
+                {
+                    redeemAdapter.setGridData(response.body().getData());
+                }
+                progress.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<redeemHistoryBean> call, Throwable t) {
+progress.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
+    class RedeemAdapter extends RecyclerView.Adapter<RedeemAdapter.ViewHolder>
+    {
+
+        Context context;
+        List<Datum> list = new ArrayList<>();
+
+
+        public RedeemAdapter(Context context , List<Datum> list)
+        {
+            this.context = context;
+            this.list = list;
+        }
+
+        public void setGridData(List<Datum> list)
+        {
+            this.list = list;
+            notifyDataSetChanged();
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.redeem_list_model , viewGroup , false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
+
+            Datum item = list.get(i);
+
+            holder.amount.setText("Amount : $ " + item.getRedeemAmount());
+            holder.mode.setText("Mode : " + item.getPaymentMode());
+            holder.date.setText(item.getCreateDate());
+            holder.status.setText(item.getStatus());
+
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder
+        {
+
+            TextView amount , mode , date , status;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                amount = itemView.findViewById(R.id.textView133);
+                mode = itemView.findViewById(R.id.textView134);
+                date = itemView.findViewById(R.id.textView135);
+                status = itemView.findViewById(R.id.textView136);
+            }
+        }
+    }
+
 }
